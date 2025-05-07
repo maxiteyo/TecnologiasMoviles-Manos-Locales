@@ -17,7 +17,6 @@ class SplashActivity : AppCompatActivity() {
             insets
         }
     }
-
-
+    //asdasdsa
 
 }

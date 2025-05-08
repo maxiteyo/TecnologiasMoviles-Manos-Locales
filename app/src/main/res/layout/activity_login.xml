@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:background="@drawable/fondo">
+
+    <ImageView
+        android:id="@+id/logoLogin"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/logosimple"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.223" />
+
+    <EditText
+        android:id="@+id/input_mail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese su email"
+        android:backgroundTint="@color/blancocrema"
+        android:textSize="20dp"
+        android:padding="20dp"
+        android:textColorHint="@color/verdeoscuro"
+
+        app:layout_constraintTop_toBottomOf="@id/logoLogin"
+        android:textColor="@color/black"
+        android:inputType="textEmailAddress"
+        android:fontFamily="serif"
+        />
+
+    <EditText
+        android:id="@+id/input_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese su contraseña"
+        android:backgroundTint="@color/blancocrema"
+        android:textSize="20dp"
+        android:padding="20dp"
+        android:textColorHint="@color/verdeoscuro"
+        app:layout_constraintTop_toBottomOf="@id/input_mail"
+        android:textColor="@color/black"
+        android:inputType="textPassword"
+        android:fontFamily="serif"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¿Olvidaste tu contraseña?"
+        android:textSize="17dp"
+        app:layout_constraintTop_toBottomOf="@id/input_password"
+        app:layout_constraintStart_toStartOf="@id/input_password"
+        android:backgroundTint="@android:color/transparent"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/verdeoscuro"
+        android:fontFamily="sans-serif-condensed-medium"
+    />
+    <Button
+        android:id="@+id/boton_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:backgroundTint="@color/verdeclaro"
+        android:textColor="@color/blancocrema"
+        android:padding="20dp"
+        android:text="Iniciar sesión"
+        android:textSize="25dp"
+        android:layout_marginTop="110dp"
+        app:layout_constraintTop_toBottomOf="@id/input_password"
+        />
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="240dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textColor="@color/verdeoscuro"
+        android:buttonTint="@color/verdeoscuro"
+        android:text="Recuérdame"
+        android:textSize="17dp"
+        app:layout_constraintTop_toBottomOf="@id/boton_login"
+        app:layout_constraintStart_toStartOf="@id/boton_login"
+        />
+
+    <EditText
+        android:id="@+id/sos_nuevo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¿Sos nuevo?"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:textSize="20dp"
+        android:textColor="@color/verdeoscuro"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/checkbox"
+        android:backgroundTint="@android:color/transparent"
+        />
+
+    <Button
+        android:id="@+id/nueva_cuenta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="75dp"
+        android:layout_marginLeft="75dp"
+        android:backgroundTint="@color/verdeclaro"
+        android:textColor="@color/blancocrema"
+        android:text="Registrate ahora"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@id/sos_nuevo"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

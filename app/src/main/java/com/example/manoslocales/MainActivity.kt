@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.manoslocales.ui.theme.ManosLocalesTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity () {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

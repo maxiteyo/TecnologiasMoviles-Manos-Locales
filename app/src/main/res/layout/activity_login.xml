@@ -52,7 +52,7 @@
         android:fontFamily="serif"
         />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/olvidaste_tu_contrasenia"
@@ -63,7 +63,8 @@
         android:layout_marginLeft="15dp"
         android:textColor="@color/verdeoscuro"
         android:fontFamily="sans-serif-condensed-medium"
-        android:inputType="text"
+        android:clickable="true"
+        android:focusable="true"
     />
     <Button
         android:id="@+id/boton_login"
@@ -94,7 +95,7 @@
         app:layout_constraintStart_toStartOf="@id/boton_login"
         />
 
-    <EditText
+    <TextView
         android:id="@+id/sos_nuevo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -105,7 +106,8 @@
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/checkbox"
         android:backgroundTint="@android:color/transparent"
-        android:inputType="text"
+        android:clickable="true"
+        android:focusable="true"
         />
 
     <Button

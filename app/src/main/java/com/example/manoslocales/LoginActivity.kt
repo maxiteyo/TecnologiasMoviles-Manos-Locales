@@ -22,7 +22,6 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.botonLogin.setOnClickListener {
 
             binding.botonLogin.setOnClickListener {
                 val email = binding.inputMail.text.toString().trim()
@@ -60,8 +59,6 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
                 }
             }
-
-        }
 
 
     }

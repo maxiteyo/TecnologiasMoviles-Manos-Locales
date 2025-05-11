@@ -16,6 +16,23 @@
         <action
             android:id="@+id/action_homeFragment_to_favoritesFragment"
             app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.manoslocales.ProductDetailFragment"
+        android:label="Detalle">
+        <argument android:name="productId" app:argType="integer" />
+        <argument android:name="productName" app:argType="string" />
+        <argument android:name="productDescription" app:argType="string" />
+        <argument android:name="productCategory" app:argType="string" />
+        <argument android:name="productPrice" app:argType="float" />
+        <argument android:name="producerName" app:argType="string" />
+        <argument android:name="imageResId" app:argType="integer" />
+
     </fragment>
 
     <fragment

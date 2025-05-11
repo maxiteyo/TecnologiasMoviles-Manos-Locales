@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "82291667609",
+    "project_id": "manoslocalesapp",
+    "storage_bucket": "manoslocalesapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82291667609:android:0d89da8da7bc6b5a337e08",
+        "android_client_info": {
+          "package_name": "com.example.manoslocales"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-ZEllRId4Q8RwAWXuT8XhBie5c6BX5YE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

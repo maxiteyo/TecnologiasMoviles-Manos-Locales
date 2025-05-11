@@ -22,4 +22,6 @@
     <string name="recuerdame">Recuérdame</string>
     <string name="sos_nuevo">¿Sos nuevo?</string>
     <string name="registrate_ahora">Registrate ahora</string>
+
+    <string name="Formulario">Nombre</string>
 </resources>

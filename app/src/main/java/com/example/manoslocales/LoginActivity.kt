@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
 
                 // Usuario hardcodeado a modo de ejmplo --> a futuro se checkea con una base de datos
 
-                if (email == "usuario@gmail.com" && password == "Prueba123") {
+                if (email == "sosusuppia22@gmail.com" && password == "Prueba123") {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
@@ -60,6 +60,15 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
 
+        binding.nuevaCuenta.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
+        binding.olvidasteContra.setOnClickListener {
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

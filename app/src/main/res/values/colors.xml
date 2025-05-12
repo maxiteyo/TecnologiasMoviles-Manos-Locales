@@ -11,4 +11,7 @@
     <color name="blancocrema">#DDD1C7</color>
     <color name="verdeoscuro">#0D462B</color>
     <color name="naranjaclaro">#D6846B</color>
+    <color name="verdenegro">#001400</color>
+    <color name="red">#FF0000</color>
+
 </resources>

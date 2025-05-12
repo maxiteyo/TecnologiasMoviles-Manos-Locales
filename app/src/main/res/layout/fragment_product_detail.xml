@@ -13,23 +13,17 @@
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="150dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
-    <TextView
-        android:id="@+id/textViewDetailPrice"
-        android:text="$0.0"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:layout_marginTop="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/textViewDetailDescription"
         android:text="Descripción"
         android:textSize="20dp"
+        android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
@@ -39,6 +33,7 @@
         android:id="@+id/textViewDetailCategory"
         android:text="Categoria: Categoria"
         android:textSize="20dp"
+        android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
@@ -48,6 +43,7 @@
         android:id="@+id/textViewDetailProducer"
         android:text="Productor: Nombre"
         android:textSize="20dp"
+        android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
@@ -57,7 +53,20 @@
         android:id="@+id/ImageProduct"
         android:layout_width="300dp"
         android:layout_height="300dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/logopaquete"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/textViewDetailPrice"
+        android:text="$0.0"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

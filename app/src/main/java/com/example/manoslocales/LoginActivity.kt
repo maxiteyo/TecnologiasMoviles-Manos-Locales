@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
 
                 // Usuario hardcodeado a modo de ejmplo --> a futuro se checkea con una base de datos
 
-                if (email == "sosusuppia22@gmail.com" && password == "Prueba123") {
+                if (email == "usuario@gmail.com" && password == "Prueba123") {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()

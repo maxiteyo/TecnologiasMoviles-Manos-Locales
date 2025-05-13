@@ -7,31 +7,32 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="@drawable/fondo"
-    android:textColor="@color/verdeoscuro"
-    tools:context=".RegisterActivity"
-    android:paddingBottom="60dp">
+    android:paddingBottom="60dp"
+    tools:context=".RegisterActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="clip_vertical"
             android:padding="16dp">
 
-                <!-- Campos general -->
+                <!-- Título -->
                 <TextView
                     android:id="@+id/tvTitulo"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/nueva_cuenta"
-                    android:textColor="@color/verdeoscuro"
-                    android:textColorHint="@color/verdeclaro"
+                    android:text="@string/nueva_cuenta"
+                    android:textColor="@color/verdeclaro"
                     android:padding="20dp"
                     android:textSize="30sp"
                     android:textStyle="bold"
                     android:fontFamily="serif"
-                    android:layout_marginTop="85dp"/>
+                    android:layout_marginTop="70dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
+                <!-- Nombre -->
                 <EditText
                     android:id="@+id/first_name"
                     android:layout_width="match_parent"
@@ -39,233 +40,263 @@
                     android:hint="@string/nombre"
                     android:inputType="textPersonName"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTitulo"/>
+                    app:layout_constraintTop_toBottomOf="@id/tvTitulo"/>
 
+                <!-- Apellido -->
                 <EditText
                     android:id="@+id/last_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/apellido"
+                    android:text="@string/apellido"
                     android:inputType="textPersonName"
                     style="@style/EstiloEditText"
                     app:layout_constraintTop_toBottomOf="@id/first_name" />
 
+                <!-- Fecha de Nacimiento -->
                 <EditText
                     android:id="@+id/fechaNacimiento"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/fecha_nacimiento"
                     android:inputType="date"
-                    style="@style/EstiloEditText"
                     android:focusable="false"
                     android:clickable="true"
+                    style="@style/EstiloEditText"
                     app:layout_constraintTop_toBottomOf="@id/last_name" />
 
+                <!-- Tipo Documento -->
                 <Spinner
                     android:id="@+id/spTipoDocumento"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/blancocrema"
                     android:padding="10dp"
-                    android:textSize="16sp"
                     android:textAlignment="center"
                     android:fontFamily="serif"
-                    android:textColor="@color/verdeoscuro"
-                    android:textColorHint="@color/verdeoscuro"
-                    app:layout_constraintTop_toBottomOf="@+id/fechaNacimiento"
+                    app:layout_constraintTop_toBottomOf="@id/fechaNacimiento"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/dni"/>
+                    app:layout_constraintEnd_toEndOf="parent" />
 
+                <!-- DNI -->
                 <EditText
                     android:id="@+id/dni"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/documento"
                     android:inputType="number"
                     style="@style/EstiloEditText"
                     app:layout_constraintTop_toBottomOf="@id/spTipoDocumento"
-                    app:layout_constraintStart_toEndOf="@id/spTipoDocumento"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
+                <!-- Teléfono -->
                 <EditText
                     android:id="@+id/telefono"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/telefono"
                     android:inputType="phone"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@+id/dni"/>
+                    app:layout_constraintTop_toBottomOf="@id/dni"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
+                <!-- Email -->
                 <EditText
                     android:id="@+id/input_mail"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/ingrese_su_email"
                     android:inputType="textEmailAddress"
                     style="@style/EstiloEditText"
                     app:layout_constraintTop_toBottomOf="@id/telefono"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
-
+                <!-- Contraseña -->
                 <EditText
                     android:id="@+id/contra"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/ingrese_su_contrasenia"
                     android:inputType="textPassword"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@id/input_mail"/>
+                    app:layout_constraintTop_toBottomOf="@id/input_mail"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
+                <!-- Confirmar Contraseña -->
                 <EditText
                     android:id="@+id/confirmarContra"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/confirmar_contrasenia"
                     android:inputType="textPassword"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@id/contra"/>
+                    app:layout_constraintTop_toBottomOf="@id/contra"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
+                <!-- Dirección -->
                 <EditText
                     android:id="@+id/direccion"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/direccion"
                     android:inputType="textPostalAddress"
                     style="@style/EstiloEditText"
                     app:layout_constraintTop_toBottomOf="@id/confirmarContra"
-                    />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
+                <!-- Código Postal -->
                 <EditText
                     android:id="@+id/codpostal"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/codigo_postal"
                     android:inputType="number"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@id/direccion"/>
+                    app:layout_constraintTop_toBottomOf="@id/direccion"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
+                <!-- Pregunta Emprendedor -->
                 <TextView
                     android:id="@+id/pregunta"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/blancocrema"
-                    android:fontFamily="serif"
-                    android:hint="@string/sos_emprendedor"
+                    android:text="@string/sos_emprendedor"
                     android:padding="20dp"
                     android:textSize="20sp"
+                    android:fontFamily="serif"
                     android:textColor="@color/verdeoscuro"
-                    android:textColorHint="@color/verdeoscuro"
-                    app:layout_constraintTop_toBottomOf="@+id/codpostal"/>
+                    app:layout_constraintTop_toBottomOf="@id/codpostal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
+                <!-- RadioGroup -->
                 <RadioGroup
                     android:id="@+id/rgEmprendedor"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:backgroundTint="@color/blancocrema"
                     android:layout_marginTop="8dp"
                     android:gravity="center_horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/pregunta">
+                    app:layout_constraintTop_toBottomOf="@id/pregunta"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                         <RadioButton
                             android:id="@+id/rbsi"
-                            android:hint="@string/si"
+                            android:text="@string/si"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="serif"
                             android:padding="10dp"
                             android:textSize="16sp"
-                            android:textColor="@color/verdeoscuro"/>
+                            android:textColor="@color/verdeoscuro" />
 
                         <RadioButton
                             android:id="@+id/rbNo"
-                            android:hint="@string/no"
+                            android:text="@string/no"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="serif"
                             android:padding="10dp"
                             android:textSize="16sp"
                             android:textColor="@color/verdeoscuro"
-                            android:layout_marginStart="45dp"/>
+                            android:layout_marginStart="45dp" />
                 </RadioGroup>
 
+                <!-- Términos y condiciones -->
                 <CheckBox
                     android:id="@+id/aceptaTerminos"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/blancocrema"
+                    android:text="@string/acepto_terminos_condiciones"
                     android:fontFamily="serif"
-                    android:hint="@string/acepto_terminos_condiciones"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@id/rgEmprendedor"
-                    app:layout_constraintEnd_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="8dp" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
-                <!-- Campos de emprendedor -->
+                <!-- Sección emprendedor -->
                 <TextView
                     android:id="@+id/tituloEmprendedor"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/blancocrema"
-                    android:fontFamily="serif"
-                    android:hint="@string/informacion_emprendimiento"
-                    android:textStyle="bold"
-                    android:visibility="gone"
-                    android:gravity="center"
+                    android:text="@string/informacion_emprendimiento"
                     android:padding="30dp"
                     android:textSize="20sp"
+                    android:gravity="center"
+                    android:textStyle="bold"
                     android:textColor="@color/verdeoscuro"
-                    android:textColorHint="@color/verdeoscuro"
-                    app:layout_constraintTop_toBottomOf="@id/aceptaTerminos" />
+                    android:fontFamily="serif"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/aceptaTerminos"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <EditText
                     android:id="@+id/nombreEmprendimiento"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/nombre_emprendimiento"
+                    android:hint="@string/nombre_emprendimiento"
                     android:inputType="text"
                     android:visibility="gone"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@+id/tituloEmprendedor"/>
+                    app:layout_constraintTop_toBottomOf="@id/tituloEmprendedor"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <EditText
                     android:id="@+id/descripcion"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/breve_descripcion"
+                    android:hint="@string/breve_descripcion"
                     android:inputType="text"
                     android:visibility="gone"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@id/nombreEmprendimiento"/>
+                    app:layout_constraintTop_toBottomOf="@id/nombreEmprendimiento"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <EditText
                     android:id="@+id/direccEmprendimiento"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/ubicacion_emprendimiento"
                     android:inputType="textPostalAddress"
                     android:visibility="gone"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@+id/descripcion"/>
+                    app:layout_constraintTop_toBottomOf="@id/descripcion"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <EditText
                     android:id="@+id/formascontacto"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/formas_contacto"
                     android:visibility="gone"
                     style="@style/EstiloEditText"
                     app:layout_constraintTop_toBottomOf="@id/direccEmprendimiento"
-                    />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
+                <!-- Botón Registrar -->
                 <Button
                     android:id="@+id/btnRegistrarse"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:backgroundTint="@color/verdeclaro"
                     android:textColor="@color/blancocrema"
-                    android:hint="@string/registrate_ahora"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@id/formascontacto" />
+                    android:text="@string/registrate_ahora"
+                    app:layout_constraintTop_toBottomOf="@id/formascontacto"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

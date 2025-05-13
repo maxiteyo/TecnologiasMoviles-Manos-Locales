@@ -1,138 +1,169 @@
 package com.example.manoslocales
 
+import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.RadioGroup
-import android.widget.Spinner
+import android.util.Patterns
+import android.view.View
+import android.view.ViewGroup
+import android.widget.*
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import java.util.Calendar
-import android.app.DatePickerDialog
-import android.view.View
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.RadioButton
-import android.widget.Toast
+import com.example.manoslocales.databinding.ActivityRegisterBinding
+import java.util.*
 import java.util.regex.Pattern
-//import androidx.core.view.ViewCompat
-//import androidx.core.view.WindowInsetsCompat
+
 
 class RegisterActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityRegisterBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_register)
-        /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets*/
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         configurarTipoDocumento()
         configurarFechaNacimiento()
         configurarEmprendedor()
         configurarBotonRegistrarse()
-        }
-
-    private fun configurarTipoDocumento() {
-        val spinner = findViewById<Spinner>(R.id.spTipoDocumento)
-        val tipos = arrayOf("DNI", "CUIL", "Pasaporte")
-        spinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, tipos)
 
     }
 
+    // --- Spinner: Tipo de documento
+    private fun configurarTipoDocumento() {
+        val tipos = arrayOf("DNI", "CUIL", "Pasaporte")
+
+        val adapter = object : ArrayAdapter<String>(
+            this,
+            android.R.layout.simple_spinner_item,
+            tipos
+        ) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getView(position, convertView, parent)
+                (view as TextView).setTextColor(getColor(R.color.verdeclaro)) // color texto seleccionado
+                view.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                return view
+            }
+
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val dropView = super.getDropDownView(position, convertView, parent)
+                (dropView as TextView).setTextColor(getColor(R.color.verdeoscuro)) // color en el desplegable
+                dropView.setBackgroundColor(getColor(R.color.blancocrema))
+                dropView.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                return dropView
+            }
+        }
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spTipoDocumento.adapter = adapter
+    }
+
+
+
+    // --- DatePicker: Fecha de nacimiento
     private fun configurarFechaNacimiento() {
-        val campoFecha = findViewById<EditText>(R.id.fechaNacimiento)
-        campoFecha.setOnClickListener {
+        binding.fechaNacimiento.setOnClickListener {
             val calendario = Calendar.getInstance()
-            val anio = calendario.get(Calendar.YEAR)
-            val mes = calendario.get(Calendar.MONTH)
-            val dia = calendario.get(Calendar.DAY_OF_MONTH)
+            val year = calendario.get(Calendar.YEAR)
+            val month = calendario.get(Calendar.MONTH)
+            val day = calendario.get(Calendar.DAY_OF_MONTH)
 
-            val datePicker = DatePickerDialog(this, { _, year, month, day ->
-                val fecha = String.format("%02d/%02d/%04d", day, month + 1, year)
-                campoFecha.setText(fecha)
-            }, anio, mes, dia)
-
-            datePicker.datePicker.maxDate = System.currentTimeMillis()
+            val datePicker = DatePickerDialog(
+                this,
+                R.style.DatePickerTheme, // Aplicamos estilo personalizado
+                { _, year, month, day ->
+                    val selectedDate = String.format("%02d/%02d/%04d", day, month + 1, year)
+                    binding.fechaNacimiento.setText(selectedDate)
+                },
+                year, month, day
+            )
             datePicker.show()
         }
     }
 
+    // --- Mostrar/Ocultar campos según si es emprendedor
     private fun configurarEmprendedor() {
-        val radioGroup = findViewById<RadioGroup>(R.id.rgEmprendedor)
-        val camposEmprendedor = listOf(
-            R.id.tituloEmprendedor,
-            R.id.nombreEmprendimiento,
-            R.id.descripcion,
-            R.id.direccEmprendimiento,
-            R.id.formascontacto
-        ).map { findViewById<View>(it) }
-
-        radioGroup.setOnCheckedChangeListener { _, checkedId ->
-            val mostrar = checkedId == R.id.rbsi
-            camposEmprendedor.forEach { it.visibility = if (mostrar) View.VISIBLE else View.GONE }
-        }
-    }
-
-    private fun configurarBotonRegistrarse() {
-        val boton = findViewById<Button>(R.id.btnRegistrarse)
-        boton.setOnClickListener {
-            if (validarCampos()) {
-                Toast.makeText(this, "Registro exitoso", Toast.LENGTH_LONG).show()
-            }
-        }
-    }
-
-    private fun validarCampos(): Boolean {
-        val camposObligatorios = listOf(
-            R.id.first_name, R.id.last_name, R.id.fechaNacimiento,
-            R.id.dni, R.id.telefono, R.id.input_mail,
-            R.id.contra, R.id.confirmarContra,
-            R.id.direccion, R.id.codpostal
+        val campos = listOf(
+            binding.tituloEmprendedor,
+            binding.nombreEmprendimiento,
+            binding.descripcion,
+            binding.direccEmprendimiento,
+            binding.formascontacto
         )
 
-        for (id in camposObligatorios) {
-            val campo = findViewById<EditText>(id)
-            if (campo.text.toString().isBlank()) {
-                campo.error = "Campo obligatorio"
-                campo.requestFocus()
-                return false
+        binding.rgEmprendedor.setOnCheckedChangeListener { _, checkedId ->
+            val mostrar = checkedId == binding.rbsi.id
+            campos.forEach { it.visibility = if (mostrar) View.VISIBLE else View.GONE }
+        }
+    }
+
+    // --- Botón Registrarse
+    private fun configurarBotonRegistrarse() {
+        binding.btnRegistrarse.setOnClickListener {
+            if (validarCampos()) {
+                Toast.makeText(this, "Registro exitoso", Toast.LENGTH_LONG).show()
+
+                // Redirige a LoginActivity después del registro
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish() // Evita que pueda volver al registro con el botón atrás
             }
         }
+    }
 
-        val contra = findViewById<EditText>(R.id.contra).text.toString()
-        val confirmar = findViewById<EditText>(R.id.confirmarContra).text.toString()
+    // --- Validación general de campos
+    private fun validarCampos(): Boolean {
+        var valido = true
 
-        if (contra != confirmar) {
-            findViewById<EditText>(R.id.confirmarContra).error = "Las contraseñas no coinciden"
-            return false
+        val dni = binding.dni.text.toString()
+        if (dni.length != 8) {
+            binding.dni.error = "El DNI debe tener exactamente 8 dígitos"
+            valido = false
         }
 
-        if (!esContrasenaValida(contra)) {
-            findViewById<EditText>(R.id.contra).error =
-                "Mínimo 8 caracteres, una mayúscula y un número"
-            return false
+        val telefono = binding.telefono.text.toString()
+        if (!telefono.matches(Regex("^\\d{8,15}$"))) {
+            binding.telefono.error = "Teléfono inválido. Solo números, entre 8 y 15 dígitos"
+            valido = false
         }
 
-        val aceptaTerminos = findViewById<CheckBox>(R.id.aceptaTerminos)
-        if (!aceptaTerminos.isChecked) {
-            Toast.makeText(this, "Debe aceptar los términos", Toast.LENGTH_SHORT).show()
-            return false
+        val email = binding.inputMail.text.toString()
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.inputMail.error = "Correo inválido"
+            valido = false
         }
 
-        val rbSi = findViewById<RadioButton>(R.id.rbsi)
-        if (rbSi.isChecked) {
+        val contra = binding.contra.text.toString()
+        val confirmar = binding.confirmarContra.text.toString()
+        val regex = Regex("^(?=.*[A-Z])(?=.*\\d).{8,}$")
+        if (!regex.matches(contra)) {
+            binding.contra.error = "Debe tener mínimo 8 caracteres, una mayúscula y un número"
+            valido = false
+        } else if (contra != confirmar) {
+            binding.confirmarContra.error = "Las contraseñas no coinciden"
+            valido = false
+        }
+
+        if (!binding.aceptaTerminos.isChecked) {
+            Toast.makeText(this, "Debe aceptar los términos y condiciones", Toast.LENGTH_SHORT).show()
+            valido = false
+        }
+
+        // Validar campos de emprendimiento si es necesario
+        if (binding.rbsi.isChecked) {
             val camposEmprendedor = listOf(
-                R.id.nombreEmprendimiento,
-                R.id.descripcion,
-                R.id.direccEmprendimiento,
-                R.id.formascontacto
+                binding.nombreEmprendimiento to "Nombre del emprendimiento",
+                binding.descripcion to "Descripción",
+                binding.direccEmprendimiento to "Dirección",
+                binding.formascontacto to "Formas de contacto"
             )
-            for (id in camposEmprendedor) {
-                val campo = findViewById<EditText>(id)
+
+            for ((campo, nombre) in camposEmprendedor) {
                 if (campo.visibility == View.VISIBLE && campo.text.toString().isBlank()) {
-                    campo.error = "Campo obligatorio"
+                    campo.error = "$nombre es obligatorio"
                     campo.requestFocus()
                     return false
                 }
@@ -145,29 +176,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun esContrasenaValida(contra: String): Boolean {
         val patron = Pattern.compile("^(?=.*[A-Z])(?=.*\\d).{8,}$")
         return patron.matcher(contra).matches()
-        /*val rgEmprendedor = findViewById<RadioGroup>(R.id.rgEmprendedor)
-        val layoutEmprendedor = findViewById<EditText>(R.id.nombreEmprendimiento)
-
-        rgEmprendedor.setOnCheckedChangeListener { _, checkedId ->
-            if (checkedId == R.id.rbSi) {
-                layoutEmprendedor.visibility = View.VISIBLE
-            } else {
-                layoutEmprendedor.visibility = View.GONE
-            }
-        }
-
-        val btnRegistrarse = findViewById<Button>(R.id.btnRegistrarse)
-        btnRegistrarse.setOnClickListener {
-            val acepto = findViewById<CheckBox>(R.id.aceptaTerminos).isChecked
-            if (!acepto) {
-                Toast.makeText(this, "Debes aceptar los términos", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            // Aquí podés validar campos y continuar con el registro
-        }*/
-
-
-
     }
+
+
 }

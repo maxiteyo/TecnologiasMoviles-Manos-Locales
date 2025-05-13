@@ -22,11 +22,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/nueva_cuenta"
-                    android:textColor="@color/verdeclaro"
-                    android:padding="20dp"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:fontFamily="serif"
+                    style="@style/TextViewStyle"
                     android:layout_marginTop="70dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -67,176 +63,140 @@
                 <!-- Tipo Documento -->
                 <Spinner
                     android:id="@+id/spTipoDocumento"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/blancocrema"
+                    android:backgroundTint="@color/verdeclaro"
                     android:padding="10dp"
                     android:textAlignment="center"
                     android:fontFamily="serif"
-                    app:layout_constraintTop_toBottomOf="@id/fechaNacimiento"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/fechaNacimiento" />
 
                 <!-- DNI -->
                 <EditText
                     android:id="@+id/dni"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/documento"
                     android:inputType="number"
+                    android:maxLength="8"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@id/spTipoDocumento"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/spTipoDocumento" />
 
                 <!-- Teléfono -->
                 <EditText
                     android:id="@+id/telefono"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/telefono"
                     android:inputType="phone"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@id/dni"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/dni" />
 
                 <!-- Email -->
                 <EditText
                     android:id="@+id/input_mail"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/ingrese_su_email"
                     android:inputType="textEmailAddress"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@id/telefono"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/telefono"/>
 
                 <!-- Contraseña -->
                 <EditText
                     android:id="@+id/contra"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/ingrese_su_contrasenia"
                     android:inputType="textPassword"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@id/input_mail"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/input_mail" />
 
                 <!-- Confirmar Contraseña -->
                 <EditText
                     android:id="@+id/confirmarContra"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/confirmar_contrasenia"
                     android:inputType="textPassword"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@id/contra"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/contra" />
 
                 <!-- Dirección -->
                 <EditText
                     android:id="@+id/direccion"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/direccion"
                     android:inputType="textPostalAddress"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@id/confirmarContra"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/confirmarContra"/>
 
                 <!-- Código Postal -->
                 <EditText
                     android:id="@+id/codpostal"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/codigo_postal"
                     android:inputType="number"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@id/direccion"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/direccion" />
 
                 <!-- Pregunta Emprendedor -->
                 <TextView
                     android:id="@+id/pregunta"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sos_emprendedor"
-                    android:padding="20dp"
-                    android:textSize="20sp"
-                    android:fontFamily="serif"
-                    android:textColor="@color/verdeoscuro"
-                    app:layout_constraintTop_toBottomOf="@id/codpostal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    style="@style/TextViewStyle"
+                    app:layout_constraintTop_toBottomOf="@id/codpostal" />
 
                 <!-- RadioGroup -->
                 <RadioGroup
                     android:id="@+id/rgEmprendedor"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="8dp"
                     android:gravity="center_horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/pregunta"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    app:layout_constraintTop_toBottomOf="@id/pregunta">
 
                         <RadioButton
                             android:id="@+id/rbsi"
                             android:text="@string/si"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="serif"
-                            android:padding="10dp"
-                            android:textSize="16sp"
-                            android:textColor="@color/verdeoscuro" />
+                            style="@style/RadioButtonStyle" />
 
                         <RadioButton
                             android:id="@+id/rbNo"
                             android:text="@string/no"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="serif"
-                            android:padding="10dp"
-                            android:textSize="16sp"
-                            android:textColor="@color/verdeoscuro"
+                            style="@style/RadioButtonStyle"
                             android:layout_marginStart="45dp" />
                 </RadioGroup>
 
                 <!-- Términos y condiciones -->
                 <CheckBox
                     android:id="@+id/aceptaTerminos"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/acepto_terminos_condiciones"
-                    android:fontFamily="serif"
+                    style="@style/CheckButtonStyle"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@id/rgEmprendedor"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/rgEmprendedor" />
 
                 <!-- Sección emprendedor -->
                 <TextView
                     android:id="@+id/tituloEmprendedor"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/informacion_emprendimiento"
-                    android:padding="30dp"
-                    android:textSize="20sp"
+                    style="@style/TextViewStyle"
                     android:gravity="center"
-                    android:textStyle="bold"
-                    android:textColor="@color/verdeoscuro"
-                    android:fontFamily="serif"
                     android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@id/aceptaTerminos"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/aceptaTerminos" />
 
                 <EditText
                     android:id="@+id/nombreEmprendimiento"
@@ -252,51 +212,44 @@
 
                 <EditText
                     android:id="@+id/descripcion"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/breve_descripcion"
                     android:inputType="text"
                     android:visibility="gone"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@id/nombreEmprendimiento"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/nombreEmprendimiento" />
 
                 <EditText
                     android:id="@+id/direccEmprendimiento"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/ubicacion_emprendimiento"
                     android:inputType="textPostalAddress"
                     android:visibility="gone"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@id/descripcion"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/descripcion" />
 
                 <EditText
                     android:id="@+id/formascontacto"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/formas_contacto"
+                    android:hint="@string/telefono"
+                    android:inputType="number"
                     android:visibility="gone"
                     style="@style/EstiloEditText"
-                    app:layout_constraintTop_toBottomOf="@id/direccEmprendimiento"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/direccEmprendimiento" />
 
                 <!-- Botón Registrar -->
                 <Button
                     android:id="@+id/btnRegistrarse"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:backgroundTint="@color/verdeclaro"
                     android:textColor="@color/blancocrema"
                     android:text="@string/registrate_ahora"
-                    app:layout_constraintTop_toBottomOf="@id/formascontacto"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/formascontacto" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

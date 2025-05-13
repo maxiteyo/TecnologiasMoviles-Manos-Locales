@@ -20,80 +20,86 @@
             android:id="@+id/editTextNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre"
+            android:hint="@string/nombre"
             android:inputType="textPersonName"
-            android:textColorHint="@color/verdeoscuro"
-            android:textColor="@color/verdeoscuro"
+            android:textColorHint="@color/verdeclaro"
+            android:textColor="@color/verdeclaro"
             android:textStyle="bold"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="12dp"
+            android:backgroundTint="@color/blancocrema"
+            />
 
         <!-- Apellido -->
         <EditText
             android:id="@+id/editTextApellido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Apellido"
+            android:hint="@string/apellido"
             android:inputType="textPersonName"
             android:layout_marginBottom="12dp"
-            android:textColorHint="@color/verdeoscuro"
-            android:textColor="@color/verdeoscuro"
-            android:textStyle="bold"/>
+            android:textColorHint="@color/verdeclaro"
+            android:textColor="@color/verdeclaro"
+            android:textStyle="bold"
+            android:backgroundTint="@color/blancocrema"/>
 
         <!-- Fecha de nacimiento -->
         <EditText
             android:id="@+id/editTextFechaNacimiento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Fecha de nacimiento"
+            android:hint="@string/fecha_de_nacimiento"
             android:focusable="false"
             android:inputType="none"
             android:layout_marginBottom="12dp"
-            android:textColorHint="@color/verdeoscuro"
-            android:textColor="@color/verdeoscuro"
-            android:textStyle="bold"/>
+            android:textColorHint="@color/verdeclaro"
+            android:textColor="@color/verdeclaro"
+            android:textStyle="bold"
+            android:backgroundTint="@color/blancocrema"/>
 
         <!-- DNI -->
         <EditText
             android:id="@+id/editTextDNI"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="DNI"
+            android:hint="@string/dni"
             android:inputType="number"
             android:layout_marginBottom="12dp"
-            android:textColorHint="@color/verdeoscuro"
-            android:textColor="@color/verdeoscuro"
-            android:textStyle="bold"/>
+            android:textColorHint="@color/verdeclaro"
+            android:textColor="@color/verdeclaro"
+            android:textStyle="bold"            android:backgroundTint="@color/blancocrema"/>
 
         <!-- Teléfono -->
         <EditText
             android:id="@+id/editTextTelefono"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Teléfono"
+            android:hint="@string/tel_fono"
             android:inputType="phone"
             android:layout_marginBottom="12dp"
-            android:textColorHint="@color/verdeoscuro"
-            android:textColor="@color/verdeoscuro"
-            android:textStyle="bold"/>
+            android:textColorHint="@color/verdeclaro"
+            android:textColor="@color/verdeclaro"
+            android:textStyle="bold"
+            android:backgroundTint="@color/blancocrema"/>
 
         <!-- Email -->
         <EditText
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:layout_marginBottom="24dp"
-            android:textColorHint="@color/verdeoscuro"
-            android:textColor="@color/verdeoscuro"
-            android:textStyle="bold"/>
+            android:textColorHint="@color/verdeclaro"
+            android:textColor="@color/verdeclaro"
+            android:textStyle="bold"
+            android:backgroundTint="@color/blancocrema"/>
 
         <!-- Botón Guardar -->
         <Button
             android:id="@+id/btnGuardar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Guardar cambios"
+            android:text="@string/guardar_cambios"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/verdeclaro"
             android:textColor="@color/blancocrema"/>
@@ -103,7 +109,7 @@
             android:id="@+id/btnSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Configuración"
+            android:text="@string/configuraci_n"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/verdeclaro"
             android:textColor="@color/blancocrema"/>
@@ -113,7 +119,7 @@
             android:id="@+id/btnCerrarSesion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cerrar sesión"
+            android:text="@string/cerrar_sesi_n"
             android:textColor="@android:color/white"
             android:backgroundTint="@color/red" />
 

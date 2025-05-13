@@ -24,4 +24,24 @@
     <string name="registrate_ahora">Registrate ahora</string>
 
     <string name="Formulario">Nombre</string>
+    <string name="notificaciones">Notificaciones</string>
+    <string name="volver">Volver</string>
+    <string name="categoria">Categoria:</string>
+    <string name="buscarproducto">Buscar productos…</string>
+    <string name="nombre_del_producto">Nombre del producto</string>
+    <string name="descripci_n">Descripción</string>
+    <string name="categoria_categoria">Categoria: Categoria</string>
+    <string name="productor_nombre">Productor: Nombre</string>
+    <string name="configuraci_n">Configuración</string>
+    <string name="cerrar_sesi_n">Cerrar sesión</string>
+    <string name="guardar_cambios">Guardar cambios</string>
+    <string name="email">Email</string>
+    <string name="tel_fono">Teléfono</string>
+    <string name="dni">DNI</string>
+    <string name="fecha_de_nacimiento">Fecha de nacimiento</string>
+    <string name="apellido">Apellido</string>
+    <string name="nombre">Nombre</string>
+    <string name="inicio">Inicio</string>
+    <string name="perfil">Perfil</string>
+    <string name="favoritos">Favoritos</string>
 </resources>

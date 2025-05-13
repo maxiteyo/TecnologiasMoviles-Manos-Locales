@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/textViewDetailName"
-        android:text="Nombre del producto"
+        android:text="@string/nombre_del_producto"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -21,7 +21,7 @@
 
     <TextView
         android:id="@+id/textViewDetailDescription"
-        android:text="Descripción"
+        android:text="@string/descripci_n"
         android:textSize="20dp"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -31,7 +31,7 @@
 
     <TextView
         android:id="@+id/textViewDetailCategory"
-        android:text="Categoria: Categoria"
+        android:text="@string/categoria_categoria"
         android:textSize="20dp"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -41,7 +41,7 @@
 
     <TextView
         android:id="@+id/textViewDetailProducer"
-        android:text="Productor: Nombre"
+        android:text="@string/productor_nombre"
         android:textSize="20dp"
         android:textStyle="bold"
         android:textColor="@color/black"

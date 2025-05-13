@@ -4,14 +4,14 @@
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/logohome"
-        android:title="Inicio" />
+        android:title="@string/inicio" />
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/logoprofile"
-        android:title="Perfil" />
+        android:title="@string/perfil" />
     <item
         android:id="@+id/favoritesFragment"
         android:icon="@drawable/logoestrella"
-        android:title="Favoritos" />
+        android:title="@string/favoritos" />
 
 </menu>

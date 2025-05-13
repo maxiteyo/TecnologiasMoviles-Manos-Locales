@@ -11,7 +11,7 @@
         android:id="@+id/searchView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:queryHint="Buscar productos..."
+        android:queryHint="@string/buscarproducto"
         android:iconifiedByDefault="false"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,16 +19,30 @@
         android:layout_marginTop="60dp"/>
 
     <!-- Filtro por categoría -->
+
+    <TextView
+        android:id="@+id/olvidaste_contra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/categoria"
+        android:textSize="23sp"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
+        android:backgroundTint="@android:color/transparent"
+        android:textColor="@color/verdeoscuro"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="100dp"
+        />
+
     <Spinner
         android:id="@+id/spinnerCategory"
         android:backgroundTint="@color/blancocrema"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/searchView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="250dp"
         />
 
     <!-- RecyclerView -->

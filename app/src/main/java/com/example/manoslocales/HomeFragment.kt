@@ -16,6 +16,8 @@ import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.SearchView
 import androidx.core.content.ContextCompat
+import androidx.activity.OnBackPressedCallback
+
 
 
 
@@ -107,4 +109,16 @@ class HomeFragment : Fragment() {
         }
         recyclerView.adapter = adapter
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // No hace nada (bloquea "volver")
+                }
+            }
+        )
+    }
+
 }

@@ -23,5 +23,23 @@
     <string name="sos_nuevo">¿Sos nuevo?</string>
     <string name="registrate_ahora">Registrate ahora</string>
 
-    <string name="Formulario">Nombre</string>
+    <string name="nueva_cuenta">Nueva Cuenta</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="fecha_nacimiento">Fecha de Nacimiento</string>
+    <string name="documento">Tipo de Documentp</string>
+    <string name="telefono">Telefono</string>
+    <string name="confirmar_contrasenia">Confirmar Contraseña</string>
+    <string name="direccion">Direccion</string>
+    <string name="codigo_postal">Codigo Postal</string>
+    <string name="sos_emprendedor">¿Sos Emprendedor?</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
+    <string name="acepto_terminos_condiciones">Acepto Términos y Condiciones y Políticas de Privacidad </string>
+    <string name="informacion_emprendimiento">Informacion sobre el Emprendimiento</string>
+    <string name="nombre_emprendimiento">Nombre del Emprendimiento</string>
+    <string name="breve_descripcion">Breve Descripcion</string>
+    <string name="ubicacion_emprendimiento">Ubicación del Emprendimiento</string>
+    <string name="formas_contacto">Formas de Contacto</string>
+
 </resources>

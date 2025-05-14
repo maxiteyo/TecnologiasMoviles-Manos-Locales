@@ -10,12 +10,25 @@ import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import java.util.Calendar
+import android.content.Context
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.RadioButton
+import android.widget.Toast
 import com.example.manoslocales.databinding.ActivityRegisterBinding
 import java.util.*
 import java.util.regex.Pattern
 
 
 class RegisterActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        val lang = LocaleHelper.getSavedLanguage(newBase)
+        val context = LocaleHelper.setLocale(newBase, lang)
+        super.attachBaseContext(context)
+    }
+
 
     private lateinit var binding: ActivityRegisterBinding
 

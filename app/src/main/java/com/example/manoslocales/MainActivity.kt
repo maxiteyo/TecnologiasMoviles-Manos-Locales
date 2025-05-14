@@ -16,9 +16,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.manoslocales.ui.theme.ManosLocalesTheme
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.content.Context
+
 
 
 class MainActivity : AppCompatActivity () {
+
+    override fun attachBaseContext(newBase: Context) {
+        val lang = LocaleHelper.getSavedLanguage(newBase)
+        val context = LocaleHelper.setLocale(newBase, lang)
+        super.attachBaseContext(context)
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

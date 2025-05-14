@@ -12,7 +12,7 @@
         android:id="@+id/txtSettingsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Configuración"
+        android:text="@string/configuraci_n"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
@@ -24,13 +24,17 @@
         android:id="@+id/switchDarkMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Modo oscuro (simulado) "
+        android:textColor="@color/verdeclaro"
+        android:textSize="18sp"
+        android:text="@string/modo_oscuro"
         android:padding="8dp"/>
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switchNotificaciones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/verdeclaro"
+        android:textSize="18sp"
         android:text="@string/notificaciones"
         android:padding="8dp"
         android:layout_marginTop="16dp" />
@@ -39,6 +43,7 @@
         android:id="@+id/spinnerIdioma"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/blancocrema"
         android:layout_marginTop="16dp"
         />
 
@@ -47,6 +52,8 @@
         android:id="@+id/btnVolver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/verdeclaro"
+        android:textColor="@color/blancocrema"
         android:text="@string/volver"
         android:layout_marginTop="24dp" />
 </LinearLayout>

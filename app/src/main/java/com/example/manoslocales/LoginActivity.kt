@@ -1,5 +1,6 @@
 package com.example.manoslocales
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -13,6 +14,13 @@ import android.widget.Toast
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+
+    override fun attachBaseContext(newBase: Context) {
+        val lang = LocaleHelper.getSavedLanguage(newBase)
+        val context = LocaleHelper.setLocale(newBase, lang)
+        super.attachBaseContext(context)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 

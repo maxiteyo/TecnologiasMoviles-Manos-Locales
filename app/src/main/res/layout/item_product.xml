@@ -44,5 +44,16 @@
             app:layout_constraintEnd_toStartOf="@id/ImageProduct"
             app:layout_constraintHorizontal_bias="0.0"/>
 
+        <ImageView
+            android:id="@+id/favoriteIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_favorite_border"
+            android:layout_gravity="end"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@id/textViewProductPrice"
+            app:layout_constraintStart_toStartOf="@id/textViewProductPrice"/>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

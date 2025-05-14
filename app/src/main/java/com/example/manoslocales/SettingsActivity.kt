@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.CompoundButton
 import android.widget.Toast
@@ -11,9 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.manoslocales.databinding.ActivitySettingsBinding
 import java.util.*
-import android.view.View
-import android.widget.AdapterView
-
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -77,22 +76,19 @@ class SettingsActivity : AppCompatActivity() {
         if (indexGuardado >= 0) binding.spinnerIdioma.setSelection(indexGuardado)
 
         binding.spinnerIdioma.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val nuevoCodigo = codigos[position]
                 if (nuevoCodigo != idiomaGuardado) {
                     sharedPrefs.edit().putString("idioma_codigo", nuevoCodigo).apply()
-                    recreate() // Recarga la activity con el nuevo idioma
+
+                    // Reiniciar la app (puede ser MainActivity o LoginActivity)
+                    val intent = Intent(this@SettingsActivity, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
                 }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Nada que hacer aquí
-            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
     }

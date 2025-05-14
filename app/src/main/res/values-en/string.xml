@@ -58,4 +58,5 @@
     <string name="breve_descripcion">Brief Description</string>
     <string name="ubicacion_emprendimiento">Business Location</string>
     <string name="formas_contacto">Contact Methods</string>
+    <string name="modo_oscuro">Dark Mode</string>
 </resources>

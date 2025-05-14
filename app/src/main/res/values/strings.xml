@@ -60,5 +60,6 @@
     <string name="breve_descripcion">Breve Descripcion</string>
     <string name="ubicacion_emprendimiento">Ubicación del Emprendimiento</string>
     <string name="formas_contacto">Formas de Contacto</string>
+    <string name="modo_oscuro">Modo oscuro</string>
 
 </resources>

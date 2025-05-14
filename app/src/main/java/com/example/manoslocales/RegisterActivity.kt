@@ -7,7 +7,6 @@ import android.util.Patterns
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Calendar
@@ -19,6 +18,7 @@ import android.widget.Toast
 import com.example.manoslocales.databinding.ActivityRegisterBinding
 import java.util.*
 import java.util.regex.Pattern
+import androidx.activity.OnBackPressedCallback
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -43,6 +43,13 @@ class RegisterActivity : AppCompatActivity() {
         configurarEmprendedor()
         configurarBotonRegistrarse()
 
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        })
     }
 
     // --- Spinner: Tipo de documento

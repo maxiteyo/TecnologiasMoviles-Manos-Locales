@@ -43,7 +43,7 @@
                     android:id="@+id/last_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/apellido"
+                    android:hint="@string/apellido"
                     android:inputType="textPersonName"
                     style="@style/EstiloEditText"
                     app:layout_constraintTop_toBottomOf="@id/first_name" />
@@ -89,6 +89,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/telefono"
                     android:inputType="phone"
+                    android:maxLength="10"
                     style="@style/EstiloEditText"
                     app:layout_constraintTop_toBottomOf="@id/dni" />
 

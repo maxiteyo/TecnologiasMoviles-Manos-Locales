@@ -48,7 +48,7 @@ fun ForgotPasswordScreen() {
     var message by remember { mutableStateOf("") }
 
     Box(modifier = Modifier.fillMaxSize()) {
-        // Fondo (opcional)
+        // Fondo
         Image(
             painter = painterResource(id = R.drawable.fondo),
             contentDescription = null,

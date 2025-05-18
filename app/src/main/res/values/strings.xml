@@ -9,6 +9,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -62,4 +63,10 @@
     <string name="formas_contacto">Formas de Contacto</string>
     <string name="modo_oscuro">Modo oscuro</string>
 
+    <string name="registroexitoso">Registro exitoso</string>
+    <string-array name="tiposdocumentos">
+        <item>DNI</item>
+        <item>CUIL</item>
+        <item>Pasaporte</item>
+    </string-array>
 </resources>

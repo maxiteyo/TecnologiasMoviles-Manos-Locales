@@ -54,7 +54,7 @@ class RegisterActivity : AppCompatActivity() {
 
     // --- Spinner: Tipo de documento
     private fun configurarTipoDocumento() {
-        val tipos = arrayOf("DNI", "CUIL", "Pasaporte")
+        val tipos = resources.getStringArray(R.array.tiposdocumentos)
 
         val adapter = object : ArrayAdapter<String>(
             this,
@@ -63,7 +63,7 @@ class RegisterActivity : AppCompatActivity() {
         ) {
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                 val view = super.getView(position, convertView, parent)
-                (view as TextView).setTextColor(getColor(R.color.verdeclaro)) // color texto seleccionado
+                (view as TextView).setTextColor(getColor(R.color.verdeoscuro))
                 view.textAlignment = View.TEXT_ALIGNMENT_CENTER
                 return view
             }
@@ -124,15 +124,18 @@ class RegisterActivity : AppCompatActivity() {
     private fun configurarBotonRegistrarse() {
         binding.btnRegistrarse.setOnClickListener {
             if (validarCampos()) {
-                Toast.makeText(this, "Registro exitoso", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.registroexitoso), Toast.LENGTH_LONG).show()
 
-                // Redirige a LoginActivity después del registro
+                // Redirige a MainActivity después del registro
                 val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
-                finish() // Evita que pueda volver al registro con el botón atrás
+            } else {
+                Toast.makeText(this, "Complete correctamente todos los campos obligatorios", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
 
     // --- Validación general de campos
     private fun validarCampos(): Boolean {
@@ -145,8 +148,8 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         val telefono = binding.telefono.text.toString()
-        if (!telefono.matches(Regex("^\\d{8,15}$"))) {
-            binding.telefono.error = "Teléfono inválido. Solo números, entre 8 y 15 dígitos"
+        if (!telefono.matches(Regex("^\\d{8,10}$"))) {
+            binding.telefono.error = "Teléfono inválido. Solo números, hasta 10 dígitos"
             valido = false
         }
 
@@ -162,7 +165,9 @@ class RegisterActivity : AppCompatActivity() {
         if (!regex.matches(contra)) {
             binding.contra.error = "Debe tener mínimo 8 caracteres, una mayúscula y un número"
             valido = false
-        } else if (contra != confirmar) {
+        }
+
+        if (contra != confirmar) {
             binding.confirmarContra.error = "Las contraseñas no coinciden"
             valido = false
         }
@@ -184,14 +189,14 @@ class RegisterActivity : AppCompatActivity() {
             for ((campo, nombre) in camposEmprendedor) {
                 if (campo.visibility == View.VISIBLE && campo.text.toString().isBlank()) {
                     campo.error = "$nombre es obligatorio"
-                    campo.requestFocus()
-                    return false
+                    valido = false
                 }
             }
         }
 
-        return true
+        return valido
     }
+
 
     private fun esContrasenaValida(contra: String): Boolean {
         val patron = Pattern.compile("^(?=.*[A-Z])(?=.*\\d).{8,}$")

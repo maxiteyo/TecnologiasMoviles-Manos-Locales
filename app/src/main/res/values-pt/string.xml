@@ -59,4 +59,5 @@
     <string name="ubicacion_emprendimiento">Localização do Empreendimento</string>
     <string name="formas_contacto">Formas de Contato</string>
     <string name="modo_oscuro">Modo escuro</string>
+    <string name="registroexitoso">Registro bem-sucedido</string>
 </resources>

@@ -1,23 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/settingsRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
     android:background="@drawable/fondo">
 
-    <TextView
-        android:id="@+id/txtSettingsTitle"
-        android:layout_width="wrap_content"
+    <!-- TOP BAR con logo alineado a la izquierda -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/configuraci_n"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
-        android:paddingBottom="16dp"
-        android:layout_marginTop="50dp"/>
+        android:background="@color/blancocrema"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/blancocrema"
+            android:contentInsetStartWithNavigation="0dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/logo_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:padding="8dp"
+                    android:src="@drawable/logomain"
+                    android:contentDescription="@string/app_name"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitStart" />
+
+                <TextView
+                    android:id="@+id/txtSettingsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/configuraci_n"
+                    android:textColor="@color/verdeoscuro"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="50dp"/>
+
+            </FrameLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <!-- Aquí podrías agregar switches o configuraciones -->
     <com.google.android.material.switchmaterial.SwitchMaterial
@@ -27,7 +66,9 @@
         android:textColor="@color/verdeclaro"
         android:textSize="18sp"
         android:text="@string/modo_oscuro"
-        android:padding="8dp"/>
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        app:trackTint="@color/verdeclaro"/>
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switchNotificaciones"
@@ -36,15 +77,17 @@
         android:textColor="@color/verdeclaro"
         android:textSize="18sp"
         android:text="@string/notificaciones"
-        android:padding="8dp"
-        android:layout_marginTop="16dp" />
+        android:padding="15dp"
+        android:layout_marginTop="16dp"
+        app:trackTint="@color/verdeclaro" />
 
     <Spinner
         android:id="@+id/spinnerIdioma"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/blancocrema"
+        android:backgroundTint="@color/verdeclaro"
         android:layout_marginTop="16dp"
+        android:padding="15dp"
         />
 
 
@@ -55,5 +98,7 @@
         android:backgroundTint="@color/verdeclaro"
         android:textColor="@color/blancocrema"
         android:text="@string/volver"
-        android:layout_marginTop="24dp" />
+        android:textSize="18sp"
+        android:layout_marginTop="30dp"
+        android:layout_margin="8dp"/>
 </LinearLayout>

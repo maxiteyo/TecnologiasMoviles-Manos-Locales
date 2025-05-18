@@ -62,7 +62,6 @@
     <string name="ubicacion_emprendimiento">Ubicación del Emprendimiento</string>
     <string name="formas_contacto">Formas de Contacto</string>
     <string name="modo_oscuro">Modo oscuro</string>
-
     <string name="registroexitoso">Registro exitoso</string>
     <string-array name="tiposdocumentos">
         <item>DNI</item>

@@ -59,4 +59,5 @@
     <string name="ubicacion_emprendimiento">Business Location</string>
     <string name="formas_contacto">Contact Methods</string>
     <string name="modo_oscuro">Dark Mode</string>
+    <string name="registroexitoso">Successful Registration</string>
 </resources>

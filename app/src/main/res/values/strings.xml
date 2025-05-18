@@ -47,7 +47,7 @@
     <string name="nombre">Nombre</string>
     <string name="apellido">Apellido</string>
     <string name="fecha_nacimiento">Fecha de Nacimiento</string>
-    <string name="documento">Tipo de Documentp</string>
+    <string name="documento">Tipo de Documento</string>
     <string name="telefono">Telefono</string>
     <string name="confirmar_contrasenia">Confirmar Contraseña</string>
     <string name="direccion">Direccion</string>

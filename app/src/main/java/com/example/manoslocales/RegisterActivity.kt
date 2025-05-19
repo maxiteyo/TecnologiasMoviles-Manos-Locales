@@ -52,33 +52,16 @@ class RegisterActivity : AppCompatActivity() {
     // --- Spinner: Tipo de documento
     private fun configurarTipoDocumento() {
         val tipos = resources.getStringArray(R.array.tiposdocumentos)
-
-        val adapter = object : ArrayAdapter<String>(
+        val adapter = ArrayAdapter(
             this,
-            android.R.layout.simple_spinner_item,
+            R.layout.spinner,
             tipos
-        ) {
-            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-                val view = super.getView(position, convertView, parent)
-                (view as TextView).setTextColor(getColor(R.color.verdeclaro))
-                view.textAlignment = View.TEXT_ALIGNMENT_CENTER
-                view.setTypeface(null, Typeface.BOLD)
-                return view
-            }
-
-            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
-                val dropView = super.getDropDownView(position, convertView, parent)
-                (dropView as TextView).setTextColor(getColor(R.color.verdeclaro)) // color en el desplegable
-                dropView.setBackgroundColor(getColor(R.color.blancocrema))
-                dropView.textAlignment = View.TEXT_ALIGNMENT_CENTER
-                dropView.setTypeface(null, Typeface.BOLD)
-                return dropView
-            }
+        ).also {
+            it.setDropDownViewResource(R.layout.spinner_dropdown)
         }
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spTipoDocumento.adapter = adapter
     }
+
 
 
 

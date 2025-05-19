@@ -11,12 +11,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Calendar
 import android.content.Context
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.RadioButton
+import android.graphics.Typeface
 import android.widget.Toast
 import com.example.manoslocales.databinding.ActivityRegisterBinding
-import java.util.*
 import java.util.regex.Pattern
 import androidx.activity.OnBackPressedCallback
 
@@ -63,16 +60,18 @@ class RegisterActivity : AppCompatActivity() {
         ) {
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
                 val view = super.getView(position, convertView, parent)
-                (view as TextView).setTextColor(getColor(R.color.verdeoscuro))
+                (view as TextView).setTextColor(getColor(R.color.verdeclaro))
                 view.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                view.setTypeface(null, Typeface.BOLD)
                 return view
             }
 
             override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
                 val dropView = super.getDropDownView(position, convertView, parent)
-                (dropView as TextView).setTextColor(getColor(R.color.verdeoscuro)) // color en el desplegable
+                (dropView as TextView).setTextColor(getColor(R.color.verdeclaro)) // color en el desplegable
                 dropView.setBackgroundColor(getColor(R.color.blancocrema))
                 dropView.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                dropView.setTypeface(null, Typeface.BOLD)
                 return dropView
             }
         }
@@ -131,7 +130,7 @@ class RegisterActivity : AppCompatActivity() {
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
             } else {
-                Toast.makeText(this, "Complete correctamente todos los campos obligatorios", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.completarcamposoblicatorios), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -143,19 +142,19 @@ class RegisterActivity : AppCompatActivity() {
 
         val dni = binding.dni.text.toString()
         if (dni.length != 8) {
-            binding.dni.error = "El DNI debe tener exactamente 8 dígitos"
+            binding.dni.error = getString(R.string.cantdigitosdni)
             valido = false
         }
 
         val telefono = binding.telefono.text.toString()
         if (!telefono.matches(Regex("^\\d{8,10}$"))) {
-            binding.telefono.error = "Teléfono inválido. Solo números, hasta 10 dígitos"
+            binding.telefono.error = getString(R.string.cantdigitostelefono)
             valido = false
         }
 
         val email = binding.inputMail.text.toString()
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.inputMail.error = "Correo inválido"
+            binding.inputMail.error = getString(R.string.correoinvalido)
             valido = false
         }
 
@@ -163,17 +162,17 @@ class RegisterActivity : AppCompatActivity() {
         val confirmar = binding.confirmarContra.text.toString()
         val regex = Regex("^(?=.*[A-Z])(?=.*\\d).{8,}$")
         if (!regex.matches(contra)) {
-            binding.contra.error = "Debe tener mínimo 8 caracteres, una mayúscula y un número"
+            binding.contra.error = getString(R.string.minimocontra)
             valido = false
         }
 
         if (contra != confirmar) {
-            binding.confirmarContra.error = "Las contraseñas no coinciden"
+            binding.confirmarContra.error = getString(R.string.nocoincidecontra)
             valido = false
         }
 
         if (!binding.aceptaTerminos.isChecked) {
-            Toast.makeText(this, "Debe aceptar los términos y condiciones", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.debeaceptarterminos), Toast.LENGTH_SHORT).show()
             valido = false
         }
 

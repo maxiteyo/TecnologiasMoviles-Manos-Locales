@@ -19,8 +19,8 @@ class ProductDetailFragment : Fragment() {
         view.findViewById<TextView>(R.id.textViewDetailName).text = args.productName
         view.findViewById<TextView>(R.id.textViewDetailPrice).text = "$${args.productPrice}"
         view.findViewById<TextView>(R.id.textViewDetailDescription).text = args.productDescription
-        view.findViewById<TextView>(R.id.textViewDetailCategory).text = "Categoria: ${args.productCategory}"
-        view.findViewById<TextView>(R.id.textViewDetailProducer).text = "Productor: ${args.producerName}"
+        view.findViewById<TextView>(R.id.textViewDetailCategory).text = getString(R.string.categoria_categoria, args.productCategory)
+        view.findViewById<TextView>(R.id.textViewDetailProducer).text = getString(R.string.productor_nombre, args.producerName)
         view.findViewById<ImageView>(R.id.ImageProduct).setImageResource(args.imageResId)
 
         return view

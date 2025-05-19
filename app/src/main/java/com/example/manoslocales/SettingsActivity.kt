@@ -60,12 +60,12 @@ class SettingsActivity : AppCompatActivity() {
 
         binding.switchNotificaciones.setOnCheckedChangeListener { _: CompoundButton, isChecked: Boolean ->
             sharedPrefs.edit().putBoolean("notificaciones", isChecked).apply()
-            val msg = if (isChecked) "Notificaciones activadas" else "Notificaciones desactivadas"
+            val msg = if (isChecked) getString(R.string.notificacionesactivadas) else getString(R.string.notificacionesdesactivadas)
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
         }
 
         // IDIOMA
-        val idiomas = listOf("Español", "Inglés", "Portugués")
+        val idiomas = resources.getStringArray(R.array.idiomas_array).toList()
         val codigos = listOf("es", "en", "pt")
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, idiomas)

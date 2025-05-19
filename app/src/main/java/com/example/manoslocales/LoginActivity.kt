@@ -36,24 +36,24 @@ class LoginActivity : AppCompatActivity() {
                 val password = binding.inputPassword.text.toString()
 
                 if (email.isEmpty()) {
-                    binding.inputMail.error = "El campo email es obligatorio"
+                    binding.inputMail.error = getString(R.string.campoemailobligatorio)
                     return@setOnClickListener
                 }
 
                 if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    binding.inputMail.error = "El email no es válido"
+                    binding.inputMail.error = getString(R.string.correoinvalido)
                     return@setOnClickListener
                 }
 
                 //Contraseña debe contener una mayus, minimo 8 caracteres y un numero
                 val passwordRegex = Regex("^(?=.*[A-Z])(?=.*\\d).{8,}$")
                 if (!passwordRegex.matches(password)) {
-                    binding.inputPassword.error = "La contraseña debe tener mínimo 8 caracteres, una mayúscula y un número"
+                    binding.inputPassword.error = getString(R.string.minimocontra)
                     return@setOnClickListener
                 }
 
                 if (password.isEmpty()) {
-                    binding.inputPassword.error = "El campo contraseña es obligatorio"
+                    binding.inputPassword.error = getString(R.string.contraobligatorio)
                     return@setOnClickListener
                 }
 
@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-                    Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.usuarioocontramal), Toast.LENGTH_SHORT).show()
                 }
             }
 

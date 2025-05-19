@@ -12,8 +12,10 @@
     </style>
 
     <style name="DatePickerTheme" parent="Theme.MaterialComponents.Dialog">
-        <item name="colorAccent">@color/blancocrema</item> <!-- Verde -->
+        <item name="colorAccent">@color/verdeclaro</item> <!-- Verde -->
         <item name="android:textColorPrimary">@color/verdeclaro</item>
+        <item name="android:textColorSecondary">@color/verdeclaro</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:background">@color/blancocrema</item>
     </style>
 

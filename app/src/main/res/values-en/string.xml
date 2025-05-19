@@ -13,6 +13,7 @@
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
+
     <string name="previous">Previous</string>
     <string name="ingrese_su_email">Enter your email</string>
     <string name="ingrese_su_contrasenia">Enter your password</string>
@@ -21,25 +22,52 @@
     <string name="recuerdame">Remember me</string>
     <string name="sos_nuevo">New here?</string>
     <string name="registrate_ahora">Register now</string>
+    <string name="campoemailobligatorio">The email field is required</string>
+    <string name="contraobligatorio">The password field is required</string>
+    <string name="usuarioocontramal">Incorrect username or password</string>
+
     <string name="Formulario">First name</string>
-    <string name="notificaciones">Notifications</string>
-    <string name="volver">Back</string>
-    <string name="categoria">Category:</string>
+
+    <string name="categoria">Category: </string>
     <string name="buscarproducto">Search products…</string>
     <string name="nombre_del_producto">Product name</string>
     <string name="descripci_n">Description</string>
-    <string name="categoria_categoria">Category: Category</string>
-    <string name="productor_nombre">Producer: Name</string>
+    <string name="categoria_categoria">Category: Category %1$s</string>
+    <string name="productor_nombre">Producer: Name %1$s</string>
+    <string name="productor">Producer </string>
+
+
     <string name="configuraci_n">Settings</string>
+    <string name="notificaciones">Notifications</string>
+    <string name="volver">Back</string>
+    <string name="modo_oscuro">Dark Mode</string>
+    <string name="notificacionesactivadas">Notifications activated</string>
+    <string name="notificacionesdesactivadas">Notifications disabled</string>
+    <string-array name="idiomas_array">
+        <item>Spanish</item>
+        <item>English</item>
+        <item>Portuguese</item>
+    </string-array>
+
+    <string name="perfil">Profile</string>
     <string name="cerrar_sesi_n">Log out</string>
     <string name="guardar_cambios">Save changes</string>
     <string name="email">Email</string>
-    <string name="tel_fono">Phone</string>
     <string name="dni">ID</string>
-    <string name="fecha_de_nacimiento">Birthdate</string>
+    <string name="datosguardados">Saved data</string>
+
     <string name="inicio">Home</string>
-    <string name="perfil">Profile</string>
     <string name="favoritos">Favorites</string>
+
+    <string-array name="categorias_array">
+        <item>All</item>
+        <item>Food</item>
+        <item>Textiles</item>
+        <item>Handicrafts</item>
+        <item>Natural Cosmetics</item>
+    </string-array>
+    <string name="todas">All</string>
+
     <string name="nueva_cuenta">New Account</string>
     <string name="nombre">First name</string>
     <string name="apellido">Last name</string>
@@ -58,6 +86,26 @@
     <string name="breve_descripcion">Brief Description</string>
     <string name="ubicacion_emprendimiento">Business Location</string>
     <string name="formas_contacto">Contact Methods</string>
-    <string name="modo_oscuro">Dark Mode</string>
+    <string name="completarcamposoblicatorios">Please complete all required fields correctly.</string>
+    <string name="cantdigitosdni">The ID must have exactly 8 digits</string>
+    <string name="cantdigitostelefono">Invalid phone number. Numbers only, up to 10 digits.</string>
+    <string name="correoinvalido">Invalid email</string>
+    <string name="minimocontra">It must have at least 8 characters, one capital letter and one number.</string>
+    <string name="nocoincidecontra">Passwords don not match</string>
+    <string name="debeaceptarterminos">You must accept the terms and conditions</string>
+    <string-array name="tiposdocumentos">
+        <item>ID</item>
+        <item>CUIL</item>
+        <item>Passport</item>
+    </string-array>
+
+
     <string name="registroexitoso">Successful Registration</string>
+    <string name="restablecercontra">Reset password</string>
+    <string name="porfavoringresarcorreo">Please enter your email</string>
+    <string name="revisarcorreo">Email sent. Check your inbox.</string>
+    <string name="error">Mistake: %1$s</string>
+    <string name="intentalonuevo">Try again</string>
+    <string name="enviarenlace">Send recovery link</string>
+
 </resources>

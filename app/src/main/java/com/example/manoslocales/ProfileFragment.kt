@@ -58,7 +58,7 @@ class ProfileFragment : Fragment() {
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            val datePicker = DatePickerDialog(requireContext(), { _, y, m, d ->
+            val datePicker = DatePickerDialog(requireContext(),R.style.DatePickerTheme, { _, y, m, d ->
                 val fecha = String.format("%02d/%02d/%04d", d, m + 1, y)
                 editTextFechaNacimiento.setText(fecha)
             }, year, month, day)
@@ -77,7 +77,7 @@ class ProfileFragment : Fragment() {
                 putString("email", editTextEmail.text.toString())
                 apply()
             }
-            Toast.makeText(requireContext(), "Datos guardados", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.datosguardados), Toast.LENGTH_SHORT).show()
         }
 
         // Acción cerrar sesión

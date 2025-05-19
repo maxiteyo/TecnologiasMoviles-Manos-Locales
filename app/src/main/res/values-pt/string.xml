@@ -13,6 +13,7 @@
     <string name="first_fragment_label">Primeiro Fragmento</string>
     <string name="second_fragment_label">Segundo Fragmento</string>
     <string name="next">Próximo</string>
+
     <string name="previous">Anterior</string>
     <string name="ingrese_su_email">Digite seu email</string>
     <string name="ingrese_su_contrasenia">Digite sua senha</string>
@@ -21,25 +22,51 @@
     <string name="recuerdame">Lembrar-me</string>
     <string name="sos_nuevo">Novo por aqui?</string>
     <string name="registrate_ahora">Registre-se agora</string>
+    <string name="campoemailobligatorio">O campo de e-mail é obrigatório</string>
+    <string name="contraobligatorio">O campo de senha é obrigatório</string>
+    <string name="usuarioocontramal">Nome de usuário ou senha incorretos</string>
+
     <string name="Formulario">Nome</string>
-    <string name="notificaciones">Notificações</string>
-    <string name="volver">Voltar</string>
-    <string name="categoria">Categoria:</string>
+
+    <string name="categoria">Categoria: </string>
     <string name="buscarproducto">Buscar produtos…</string>
     <string name="nombre_del_producto">Nome do produto</string>
     <string name="descripci_n">Descrição</string>
-    <string name="categoria_categoria">Categoria: Categoria</string>
-    <string name="productor_nombre">Produtor: Nome</string>
+    <string name="categoria_categoria">Categoria: Categoria %1$s</string>
+    <string name="productor_nombre">Produtor: Nome %1$s</string>
+    <string name="productor">Produtor </string>
+
+    <string name="notificaciones">Notificações</string>
+    <string name="volver">Voltar</string>
     <string name="configuraci_n">Configuração</string>
+    <string name="modo_oscuro">Modo escuro</string>
+    <string name="notificacionesactivadas">Notificações ativadas</string>
+    <string name="notificacionesdesactivadas">Notificações desativadas</string>
+    <string-array name="idiomas_array">
+        <item>Espanhol,</item>
+        <item>Inglês</item>
+        <item>Português</item>
+    </string-array>
+
+    <string name="perfil">Perfil</string>
     <string name="cerrar_sesi_n">Sair</string>
     <string name="guardar_cambios">Salvar alterações</string>
     <string name="email">Email</string>
-    <string name="tel_fono">Telefone</string>
-    <string name="dni">RG</string>
-    <string name="fecha_de_nacimiento">Data de nascimento</string>
+    <string name="dni">ID</string>
+    <string name="datosguardados">Dados salvos</string>
+
     <string name="inicio">Início</string>
-    <string name="perfil">Perfil</string>
     <string name="favoritos">Favoritos</string>
+
+    <string-array name="categorias_array">
+        <item>Todos</item>
+        <item>Alimentos</item>
+        <item>Têxteis</item>
+        <item>Artesanato</item>
+        <item>Cosméticos Naturais</item>
+    </string-array>
+    <string name="todas">Todos</string>
+
     <string name="nueva_cuenta">Nova Conta</string>
     <string name="nombre">Nome</string>
     <string name="apellido">Sobrenome</string>
@@ -58,6 +85,26 @@
     <string name="breve_descripcion">Breve Descrição</string>
     <string name="ubicacion_emprendimiento">Localização do Empreendimento</string>
     <string name="formas_contacto">Formas de Contato</string>
-    <string name="modo_oscuro">Modo escuro</string>
+    <string name="completarcamposoblicatorios">Por favor, preencha todos os campos obrigatórios corretamente.</string>
+    <string name="cantdigitosdni">O ID deve ter exatamente 8 dígitos</string>
+    <string name="cantdigitostelefono">Número de telefone inválido. Somente números, até 10 dígitos</string>
+    <string name="correoinvalido">E-mail inválido</string>
+    <string name="minimocontra">Deve ter pelo menos 8 caracteres, uma letra maiúscula e um número.</string>
+    <string name="nocoincidecontra">As senhas não correspondem</string>
+    <string name="debeaceptarterminos">Você deve aceitar os termos e condições</string>
+    <string-array name="tiposdocumentos">
+        <item>ID</item>
+        <item>CUIL</item>
+        <item>Passaporte</item>
+    </string-array>
+
+
     <string name="registroexitoso">Registro bem-sucedido</string>
+    <string name="restablecercontra">Redefinir senha</string>
+    <string name="porfavoringresarcorreo">Por favor insira seu e-mail</string>
+    <string name="revisarcorreo">E-mail enviado. Verifique sua caixa de entrada.</string>
+    <string name="error">Erro: %1$s</string>
+    <string name="intentalonuevo">Tente novamente</string>
+    <string name="enviarenlace">Enviar link de recuperação</string>
+
 </resources>

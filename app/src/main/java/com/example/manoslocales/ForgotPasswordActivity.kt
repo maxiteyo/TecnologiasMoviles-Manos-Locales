@@ -15,6 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -75,7 +76,7 @@ fun ForgotPasswordScreen() {
 
             // Título
             Text(
-                text = "Restablecer contraseña",
+                text = stringResource(R.string.restablecercontra),
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 color = verdeClaro
@@ -89,7 +90,7 @@ fun ForgotPasswordScreen() {
                 onValueChange = { email = it },
                 label = {
                     Text(
-                        text = "Correo electrónico",
+                        text = stringResource(R.string.ingrese_su_email),
                         color = verdeClaro,
                         fontWeight = FontWeight.Bold
                     )
@@ -110,18 +111,20 @@ fun ForgotPasswordScreen() {
             Spacer(modifier = Modifier.height(24.dp))
 
             // Botón
+            val context = LocalContext.current
             Button(
                 onClick = {
                     if (email.isBlank()) {
-                        message = "Por favor, ingresá tu correo"
+                        message = context.getString(R.string.porfavoringresarcorreo)
                     } else {
                         FirebaseAuth.getInstance()
                             .sendPasswordResetEmail(email)
                             .addOnCompleteListener { task ->
                                 message = if (task.isSuccessful) {
-                                    "Correo enviado. Revisa tu bandeja de entrada."
+                                    context.getString(R.string.revisarcorreo)
                                 } else {
-                                    "Error: ${task.exception?.localizedMessage ?: "Intentalo de nuevo"}"
+                                    val fallback = context.getString(R.string.intentalonuevo)
+                                    context.getString(R.string.error, task.exception?.localizedMessage ?: fallback)
                                 }
                                 Toast.makeText(context, message, Toast.LENGTH_LONG).show()
                             }
@@ -136,7 +139,7 @@ fun ForgotPasswordScreen() {
                 )
             ) {
                 Text(
-                    text = "Enviar enlace de recuperación",
+                    text = stringResource(R.string.enviarenlace),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold
                 )

@@ -18,6 +18,7 @@ import android.widget.EditText
 import android.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.activity.OnBackPressedCallback
+import androidx.compose.ui.res.stringResource
 
 
 
@@ -53,7 +54,7 @@ class HomeFragment : Fragment() {
 
 
         val spinner = view.findViewById<Spinner>(R.id.spinnerCategory)
-        val categories = listOf("Todas", "Alimentos", "Textiles", "Artesanías", "Cosmética Natural")
+        val categories = resources.getStringArray(R.array.categorias_array).toList()
 
         val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, categories)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -91,7 +92,7 @@ class HomeFragment : Fragment() {
         val searchText = view?.findViewById<SearchView>(R.id.searchView)?.query.toString().lowercase()
 
         filteredProductList = originalProductList.filter { product ->
-            val matchesCategory = selectedCategory == "Todas" || product.category.equals(selectedCategory, ignoreCase = true)
+            val matchesCategory = selectedCategory == getString(R.string.todas) || product.category.equals(selectedCategory, ignoreCase = true)
             val matchesSearch = product.name.lowercase().contains(searchText)
             matchesCategory && matchesSearch
         }

@@ -27,14 +27,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/ingrese_su_email"
-        android:backgroundTint="@color/blancocrema"
-        android:textSize="20sp"
-        android:padding="20dp"
-        android:textColorHint="@color/verdeoscuro"
-        android:textColor="@color/verdeoscuro"
+        style="@style/EstiloEditText"
         app:layout_constraintTop_toBottomOf="@id/logoLogin"
         android:inputType="textEmailAddress"
-        android:fontFamily="serif"
         />
 
     <EditText

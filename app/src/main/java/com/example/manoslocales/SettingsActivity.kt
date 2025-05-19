@@ -68,7 +68,9 @@ class SettingsActivity : AppCompatActivity() {
         val idiomas = resources.getStringArray(R.array.idiomas_array).toList()
         val codigos = listOf("es", "en", "pt")
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, idiomas)
+        val adapter = ArrayAdapter(this, R.layout.spinner, idiomas).also {
+            it.setDropDownViewResource(R.layout.spinner_dropdown)
+        }
         binding.spinnerIdioma.adapter = adapter
 
         val idiomaGuardado = sharedPrefs.getString("idioma_codigo", "es")

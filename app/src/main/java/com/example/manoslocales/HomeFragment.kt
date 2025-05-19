@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
         val spinner = view.findViewById<Spinner>(R.id.spinnerCategory)
         val categories = resources.getStringArray(R.array.categorias_array).toList()
 
-        val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, categories)
+        val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.spinner, categories)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = spinnerAdapter
 
@@ -112,6 +112,7 @@ class HomeFragment : Fragment() {
         }
         recyclerView.adapter = adapter
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -122,6 +123,22 @@ class HomeFragment : Fragment() {
                 }
             }
         )
+
+        val spinnerCategory = view.findViewById<Spinner>(R.id.spinnerCategory)
+
+        // Array de categorías (puede venir de recursos o lista)
+        val categorias = resources.getStringArray(R.array.categorias_array)
+
+        // Crear adapter con tus layouts personalizados
+        val adapter = ArrayAdapter(
+            requireContext(),
+            R.layout.spinner,
+            categorias
+        ).also {
+            it.setDropDownViewResource(R.layout.spinner_dropdown)
+        }
+
+        spinnerCategory.adapter = adapter
     }
 
 }

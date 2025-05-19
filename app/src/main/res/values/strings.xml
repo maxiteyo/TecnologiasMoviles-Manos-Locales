@@ -5,7 +5,7 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">Welcome !</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
@@ -35,9 +35,10 @@
     <string name="buscarproducto">Buscar productos…</string>
     <string name="nombre_del_producto">Nombre del producto</string>
     <string name="descripci_n">Descripción</string>
-    <string name="categoria_categoria">Categoria: Categoria %1$s</string>
-    <string name="productor_nombre">Productor: Nombre %1$s</string>
-    <string name="productor">Productor </string>
+    <string name="categoria_categoria">Categoria: Categoria </string>
+    <string name="productor_nombre">Productor: Nombre </string>
+    <string name="productor_spinner">Productor: %1$s</string>
+    <string name="categoria_spinner">Categoria: %1$s</string>
 
     <!-- Setting Activity -->
     <string name="notificaciones">Notificaciones</string>
@@ -72,6 +73,10 @@
         <item>Cosmética Natural</item>
     </string-array>
     <string name="todas">Todas</string>
+    <string name="alimentos">Alimentos</string>
+    <string name="textiles">Textiles</string>
+    <string name="artesanias">Artesanías</string>
+    <string name="cosmeticanatural">Cosmética Natural</string>
 
     <!-- Register Activity-->
     <string name="nueva_cuenta">Nueva Cuenta</string>

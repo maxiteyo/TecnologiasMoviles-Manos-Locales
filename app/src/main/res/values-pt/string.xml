@@ -32,9 +32,10 @@
     <string name="buscarproducto">Buscar produtos…</string>
     <string name="nombre_del_producto">Nome do produto</string>
     <string name="descripci_n">Descrição</string>
-    <string name="categoria_categoria">Categoria: Categoria %1$s</string>
-    <string name="productor_nombre">Produtor: Nome %1$s</string>
-    <string name="productor">Produtor </string>
+    <string name="categoria_categoria">Categoria: Categoria </string>
+    <string name="productor_nombre">Produtor: Nome </string>
+    <string name="productor_spinner">Produtor: %1$s</string>
+    <string name="categoria_spinner">Categoria: %1$s</string>
 
     <string name="notificaciones">Notificações</string>
     <string name="volver">Voltar</string>
@@ -43,7 +44,7 @@
     <string name="notificacionesactivadas">Notificações ativadas</string>
     <string name="notificacionesdesactivadas">Notificações desativadas</string>
     <string-array name="idiomas_array">
-        <item>Espanhol,</item>
+        <item>Espanhol</item>
         <item>Inglês</item>
         <item>Português</item>
     </string-array>
@@ -66,6 +67,11 @@
         <item>Cosméticos Naturais</item>
     </string-array>
     <string name="todas">Todos</string>
+    <string name="alimentos">Alimentos</string>
+    <string name="textiles">Têxteis</string>
+    <string name="artesanias">Artesanato</string>
+    <string name="cosmeticanatural">Cosméticos Naturais</string>
+
 
     <string name="nueva_cuenta">Nova Conta</string>
     <string name="nombre">Nome</string>

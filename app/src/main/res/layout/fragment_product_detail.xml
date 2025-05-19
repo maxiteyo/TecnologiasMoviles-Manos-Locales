@@ -43,14 +43,35 @@
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
-
     <TextView
         android:id="@+id/textViewDetailName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/nombre_del_producto"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/verdeoscuro"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"/>
+
+    <ImageView
+        android:id="@+id/ImageProduct"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/logopaquete"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center"
+
+        />
+
+    <TextView
+        android:id="@+id/textViewDetailPrice"
+        android:text="$0.0"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:textColor="@color/verdeoscuro"
+        android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
@@ -88,24 +109,43 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"/>
 
-    <ImageView
-        android:id="@+id/ImageProduct"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/logopaquete"
-        android:scaleType="centerCrop"
-        android:layout_gravity="center"/>
-
-    <TextView
-        android:id="@+id/textViewDetailPrice"
-        android:text="$0.0"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        android:textColor="@color/verdeoscuro"
-        android:layout_marginTop="8dp"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp">
+
+        <ImageButton
+            android:id="@+id/btnInstagram"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="8dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            android:padding="8dp"
+            android:src="@drawable/ic_instagam" />
+
+        <ImageButton
+            android:id="@+id/btnWp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="8dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            android:padding="8dp"
+            android:src="@drawable/ic_wp" />
+
+        <ImageButton
+            android:id="@+id/btnShare"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="8dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            android:padding="8dp"
+            android:src="@drawable/ic_share" />
+    </LinearLayout>
+
 
 </LinearLayout>

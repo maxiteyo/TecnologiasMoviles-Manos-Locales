@@ -32,9 +32,10 @@
     <string name="buscarproducto">Search products…</string>
     <string name="nombre_del_producto">Product name</string>
     <string name="descripci_n">Description</string>
-    <string name="categoria_categoria">Category: Category %1$s</string>
-    <string name="productor_nombre">Producer: Name %1$s</string>
-    <string name="productor">Producer </string>
+    <string name="categoria_categoria">Category: Category </string>
+    <string name="productor_nombre">Producer: Name </string>
+    <string name="productor_spinner">Producer: %1$s</string>
+    <string name="categoria_spinner">Category: %1$s</string>
 
 
     <string name="configuraci_n">Settings</string>
@@ -67,6 +68,11 @@
         <item>Natural Cosmetics</item>
     </string-array>
     <string name="todas">All</string>
+    <string name="alimentos">Food</string>
+    <string name="textiles">Textiles</string>
+    <string name="artesanias">Handicrafts</string>
+    <string name="cosmeticanatural">Natural Cosmetics</string>
+
 
     <string name="nueva_cuenta">New Account</string>
     <string name="nombre">First name</string>

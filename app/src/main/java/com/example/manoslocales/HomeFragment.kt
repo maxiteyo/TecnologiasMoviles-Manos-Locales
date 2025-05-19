@@ -39,15 +39,16 @@ class HomeFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerViewProducts)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        val context = requireContext()
         originalProductList = listOf(
-            Product(1, "Miel Orgánica", "Miel natural cosechada a mano.", "Alimentos",1200.0, "María Gómez", R.drawable.mielorganica),
-            Product(2, "Queso de cabra", "Queso fresco elaborado artesanalmente.", "Alimentos",850.0, "Pedro Sánchez", R.drawable.quesocabra),
-            Product(3, "Frutillas frescas", "Frutillas sin pesticidas, recién cosechadas.", "Alimentos",500.0, "Juan Pérez",R.drawable.frutillasfrescas),
-            Product(4, "Nueces", "Nueces naturales", "Alimentos",250.0,"Maximo Teyo", R.drawable.nueces),
-            Product(5, "Sueter de lana", "Sueter de lana hecho a mano", "Textiles" ,2000.0, "Sofia Suppia", R.drawable.sueter),
-            Product(6,"Jarrón artesanal","Jarrón artesanal pintado a mano" ,"Artesanías",5000.0, "Lionel Messi", R.drawable.jarron),
-            Product(7,"Aceite de almendra","Aceite de almendra hidratante","Cosmética Natural",700.0 , "Pepe Salamandra", R.drawable.aceite),
-            Product(8, "Autito de madera", "Autito de madera artesanal", "Artesanías", 1300.0, "Guido Kaczka", R.drawable.autito)
+            Product(1, "Miel Orgánica", "Miel natural cosechada a mano.", context.getString(R.string.alimentos),1200.0, "María Gómez", R.drawable.mielorganica),
+            Product(2, "Queso de cabra", "Queso fresco elaborado artesanalmente.", context.getString(R.string.alimentos),850.0, "Pedro Sánchez", R.drawable.quesocabra),
+            Product(3, "Frutillas frescas", "Frutillas sin pesticidas, recién cosechadas.", context.getString(R.string.alimentos),500.0, "Juan Pérez",R.drawable.frutillasfrescas),
+            Product(4, "Nueces", "Nueces naturales", context.getString(R.string.alimentos),250.0,"Maximo Teyo", R.drawable.nueces),
+            Product(5, "Sueter de lana", "Sueter de lana hecho a mano", context.getString(R.string.textiles) ,2000.0, "Sofia Suppia", R.drawable.sueter),
+            Product(6,"Jarrón artesanal","Jarrón artesanal pintado a mano" ,context.getString(R.string.artesanias),5000.0, "Lionel Messi", R.drawable.jarron),
+            Product(7,"Aceite de almendra","Aceite de almendra hidratante",context.getString(R.string.cosmeticanatural),700.0 , "Pepe Salamandra", R.drawable.aceite),
+            Product(8, "Autito de madera", "Autito de madera artesanal", context.getString(R.string.artesanias), 1300.0, "Guido Kaczka", R.drawable.autito)
         )
 
         filteredProductList = originalProductList

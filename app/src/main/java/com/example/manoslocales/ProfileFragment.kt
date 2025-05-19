@@ -91,7 +91,7 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
 
-        // Ir a settings (te ayudo con esto en el próximo paso)
+        // Ir a settings
         btnSettings.setOnClickListener {
             val intent = android.content.Intent(requireContext(), SettingsActivity::class.java)
             startActivity(intent)

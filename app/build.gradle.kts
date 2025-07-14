@@ -6,6 +6,7 @@ plugins {
     //id("com.android.application")
     // Add the Google services Gradle plugin
     id("com.google.gms.google-services")
+    id("kotlin-kapt")
 }
 
 android {
@@ -83,8 +84,23 @@ dependencies {
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation("com.google.firebase:firebase-analytics")
     implementation ("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx")
 
+    val room_version = "2.6.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    // Soporte para Coroutines en Room
+    implementation("androidx.room:room-ktx:$room_version")
 
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    // Opcional pero recomendado: para ver logs de las llamadas de red
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+
+    implementation("io.coil-kt:coil:2.6.0")
+
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries

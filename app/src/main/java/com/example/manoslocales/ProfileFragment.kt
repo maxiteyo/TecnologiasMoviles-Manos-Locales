@@ -46,7 +46,7 @@ class ProfileFragment : Fragment() {
         // Cargar datos guardados
         editTextNombre.setText(prefs.getString("nombre", "usuario"))
         editTextApellido.setText(prefs.getString("apellido", "usuario"))
-        editTextFechaNacimiento.setText(prefs.getString("fechaNacimiento", "31/102000"))
+        editTextFechaNacimiento.setText(prefs.getString("fechaNacimiento", "31/10/2000"))
         editTextDNI.setText(prefs.getString("dni", "12345678"))
         editTextTelefono.setText(prefs.getString("telefono", "3517892308"))
         editTextEmail.setText(prefs.getString("email", "usuario@gmail.com"))

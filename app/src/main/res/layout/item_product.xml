@@ -12,7 +12,7 @@
         android:background="@color/blancocrema">
 
         <ImageView
-            android:id="@+id/ImageProduct"
+            android:id="@+id/image_product"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/logopaquete"
@@ -32,7 +32,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/ImageProduct"
+            app:layout_constraintEnd_toStartOf="@id/image_product"
             app:layout_constraintHorizontal_bias="0.0"/>
 
         <TextView
@@ -43,7 +43,7 @@
             android:textColor="@color/verdeoscuro"
             app:layout_constraintStart_toStartOf="@id/textViewProductName"
             app:layout_constraintTop_toBottomOf="@id/textViewProductName"
-            app:layout_constraintEnd_toStartOf="@id/ImageProduct"
+            app:layout_constraintEnd_toStartOf="@id/image_product"
             app:layout_constraintHorizontal_bias="0.0"/>
 
         <ImageView

@@ -83,7 +83,7 @@ class SettingsActivity : AppCompatActivity() {
                 if (nuevoCodigo != idiomaGuardado) {
                     sharedPrefs.edit().putString("idioma_codigo", nuevoCodigo).apply()
 
-                    // Reiniciar la app (puede ser MainActivity o LoginActivity)
+                    // Reiniciar la app (MainActivity)
                     val intent = Intent(this@SettingsActivity, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)

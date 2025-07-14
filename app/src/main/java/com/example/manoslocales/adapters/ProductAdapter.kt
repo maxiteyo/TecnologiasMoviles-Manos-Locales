@@ -1,65 +1,63 @@
 package com.example.manoslocales.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.ImageView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.manoslocales.R
+import com.example.manoslocales.databinding.ItemProductBinding
 import com.example.manoslocales.models.Product
-import com.example.manoslocales.repositories.FavoriteRepository
-
+import com.example.manoslocales.ui.ProductViewModel
 
 class ProductAdapter(
-    private var productList: List<Product>,
-    private val onItemClick: (Product) -> Unit
-) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
-
-    class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val nameText: TextView = itemView.findViewById(R.id.textViewProductName)
-        val priceText: TextView = itemView.findViewById(R.id.textViewProductPrice)
-        val imageView: ImageView = itemView.findViewById(R.id.ImageProduct)
-        val favoriteIcon: ImageView = itemView.findViewById(R.id.favoriteIcon)
-    }
+    private val viewModel: ProductViewModel,
+    private val onProductClicked: (Product) -> Unit
+) : ListAdapter<Product, ProductAdapter.ProductViewHolder>(ProductDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_product, parent, false)
-        return ProductViewHolder(view)
+        val binding = ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ProductViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        val product = productList[position]
-        holder.nameText.text = product.name
-        holder.priceText.text = "$${product.price}"
-        holder.imageView.setImageResource(product.imageResId)
+        val product = getItem(position)
+        holder.bind(product)
+    }
 
+    inner class ProductViewHolder(private val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(product: Product) {
+            binding.textViewProductName.text = product.name
+            binding.textViewProductPrice.text = "$${product.price}"
+            Glide.with(binding.root.context).load(product.imageUrl).into(binding.imageProduct)
 
-        holder.itemView.setOnClickListener {
-            onItemClick(product)
-        }
-        holder.favoriteIcon.setImageResource(
-            if (FavoriteRepository.isFavorite(product)) R.drawable.ic_favorite else R.drawable.ic_favorite_border
-        )
-
-        holder.favoriteIcon.setOnClickListener {
-            if (FavoriteRepository.isFavorite(product)) {
-                FavoriteRepository.removeFavorite(product)
-                holder.favoriteIcon.setImageResource(R.drawable.ic_favorite_border)
+            // CORRECCIÓN: Se restaura la lógica para cambiar el ícono usando los nombres que proporcionaste.
+            val favoriteIconResource = if (product.isFavorite) {
+                R.drawable.ic_favorite // Ícono de estrella llena
             } else {
-                FavoriteRepository.addFavorite(product)
-                holder.favoriteIcon.setImageResource(R.drawable.ic_favorite)
+                R.drawable.ic_favorite_border // Ícono de estrella vacía
+            }
+            binding.favoriteIcon.setImageResource(favoriteIconResource)
+
+            binding.root.setOnClickListener {
+                onProductClicked(product)
+            }
+
+            binding.favoriteIcon.setOnClickListener {
+                val updatedProduct = product.copy(isFavorite = !product.isFavorite)
+                viewModel.updateProduct(updatedProduct)
             }
         }
-
     }
 
-    fun updateProducts(newProducts: List<Product>) {
-        this.productList = newProducts
-        notifyDataSetChanged()
+    object ProductDiffCallback : DiffUtil.ItemCallback<Product>() {
+        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+            return oldItem == newItem
+        }
     }
-
-
-    override fun getItemCount(): Int = productList.size
 }

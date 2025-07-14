@@ -1,20 +1,19 @@
 package com.example.manoslocales.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
+
+@Entity(tableName = "products")
 data class Product(
-    val id: Int,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0, // Le damos un valor por defecto para que Room pueda autogenerarlo
     val name: String,
     val description: String,
     val category: String,
     val price: Double,
-    val producerName: String,
-    val imageResId: Int,
+    @SerializedName("producerName") val producerName: String,
+    // CAMBIO: De Int a String para la URL de la imagen
+    @SerializedName("imageResId") val imageUrl: String,
     var isFavorite: Boolean = false
-){
-    override fun equals(other: Any?): Boolean {
-        return (other is Product) && this.id == other.id
-    }
-
-    override fun hashCode(): Int {
-        return id.hashCode()
-    }
-}
+)

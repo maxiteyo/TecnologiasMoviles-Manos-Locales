@@ -48,13 +48,18 @@ class ProductViewModel(private val repository: ProductRepository) : ViewModel() 
     }
 
     // --- MÉTODOS EXISTENTES (SIN CAMBIOS) ---
-    init {
+    /*init {
         refreshProducts()
-    }
+    }*/
+
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
 
     fun refreshProducts() {
         viewModelScope.launch {
+            _isRefreshing.value = true
             repository.refreshProducts()
+            _isRefreshing.value = false
         }
     }
 

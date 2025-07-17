@@ -19,28 +19,26 @@ class ProductRepository(
     // Es 'suspend' porque realiza operaciones de red y de base de datos.
     suspend fun refreshProducts() {
         try {
-            // 1. Obtiene los IDs de todos los productos que actualmente son favoritos en la BD local.
             val favoriteProductIds = productDao.getAllProductsList()
                 .filter { it.isFavorite }
                 .map { it.id }
                 .toSet()
 
-            // 2. Llama a la API para obtener la lista de productos más reciente.
             val productsFromApi = apiService.getAllProducts()
+            Log.d("ProductRepository", "Productos recibidos de la API: ${productsFromApi.size}")
 
-            // 3. Fusiona los datos: Mapea la lista de la API y preserva el estado 'isFavorite'.
             val mergedProducts = productsFromApi.map { apiProduct ->
                 apiProduct.copy(isFavorite = favoriteProductIds.contains(apiProduct.id))
             }
 
-            // 4. Inserta la nueva lista fusionada en la base de datos.
-            // Room reemplazará los productos existentes pero ahora con el estado de favorito correcto.
-            productDao.insertAll(mergedProducts)
+            val apiIds = mergedProducts.map { it.id }
+            productDao.deleteProductsNotIn(apiIds) // Elimina los que ya no están en la API
+            productDao.insertAll(mergedProducts)   // Inserta/actualiza los nuevos y existentes
+
+            Log.d("ProductRepository", "Productos sincronizados en Room: ${mergedProducts.size}")
 
         } catch (e: Exception) {
-            // En caso de un error de red, lo registramos.
-            // La app seguirá mostrando los datos que ya tenía en la base de datos.
-            Log.e("ProductRepository", "Error al refrescar productos: ${e.message}")
+            Log.e("ProductRepository", "Error al refrescar productos: ${e.message}", e)
         }
     }
 

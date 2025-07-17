@@ -22,4 +22,7 @@ interface ProductDao {
 
     @Update
     suspend fun update(product: Product)
+
+    @Query("DELETE FROM products WHERE id NOT IN (:ids)")
+    suspend fun deleteProductsNotIn(ids: List<Int>)
 }

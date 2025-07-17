@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.SearchView
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.manoslocales.adapters.ProductAdapter
 import com.example.manoslocales.databinding.FragmentHomeBinding
 import com.example.manoslocales.ui.ProductViewModel
@@ -43,14 +44,14 @@ class HomeFragment : Fragment() {
         setupRecyclerView()
         setupSpinner()
         setupSearchView()
+        setupSwipeRefresh()
         setupBackButton()
+        binding.searchView.setIconifiedByDefault(false)
+        binding.searchView.isIconified = false
 
-        // Observa la nueva lista FILTRADA del ViewModel
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                // ¡CAMBIO CLAVE! Observamos 'filteredProducts'
                 viewModel.filteredProducts.collect { products ->
-                    // Simplemente enviamos la lista al adaptador.
                     productAdapter.submitList(products)
                 }
             }
@@ -58,9 +59,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        // Pasamos el viewModel al adaptador como antes
         productAdapter = ProductAdapter(viewModel) { selectedProduct ->
-            // Tu lógica de navegación no cambia
             val action = HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(
                 selectedProduct.id,
                 selectedProduct.name,
@@ -84,9 +83,7 @@ class HomeFragment : Fragment() {
         binding.spinnerCategory.adapter = spinnerAdapter
         binding.spinnerCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                // ¡CAMBIO CLAVE! Informamos al ViewModel de la nueva categoría
                 val selectedCategory = parent.getItemAtPosition(position).toString()
-                // Usamos "Todas" si es la primera opción, que coincide con el valor por defecto en el ViewModel
                 viewModel.setSelectedCategory(if (selectedCategory == getString(R.string.todas)) "Todas" else selectedCategory)
             }
             override fun onNothingSelected(parent: AdapterView<*>) {}
@@ -97,14 +94,22 @@ class HomeFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean = false
             override fun onQueryTextChange(newText: String?): Boolean {
-                // ¡CAMBIO CLAVE! Informamos al ViewModel de la nueva búsqueda
                 viewModel.setSearchQuery(newText.orEmpty())
                 return true
             }
         })
     }
 
-    // Ya no necesitas la función filterProducts() ni la variable fullProductList
+    private fun setupSwipeRefresh() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.refreshProducts()
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.isRefreshing.collect { refreshing ->
+                binding.swipeRefreshLayout.isRefreshing = refreshing
+            }
+        }
+    }
 
     private fun setupBackButton() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,

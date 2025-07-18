@@ -3,6 +3,7 @@ package com.example.manoslocales
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -11,8 +12,13 @@ import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.manoslocales.databinding.ActivitySettingsBinding
 import java.util.*
+import java.util.concurrent.TimeUnit
+
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -27,6 +33,7 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //probarNotificacion()
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -58,10 +65,22 @@ class SettingsActivity : AppCompatActivity() {
         val notificacionesActivas = sharedPrefs.getBoolean("notificaciones", true)
         binding.switchNotificaciones.isChecked = notificacionesActivas
 
+        // Asegura que el Worker esté programado si las notificaciones están activas
+        if (notificacionesActivas) {
+            programarRecordatorio()
+        } else {
+            cancelarRecordatorio()
+        }
+
         binding.switchNotificaciones.setOnCheckedChangeListener { _: CompoundButton, isChecked: Boolean ->
             sharedPrefs.edit().putBoolean("notificaciones", isChecked).apply()
             val msg = if (isChecked) getString(R.string.notificacionesactivadas) else getString(R.string.notificacionesdesactivadas)
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+            if (isChecked) {
+                programarRecordatorio()
+            } else {
+                cancelarRecordatorio()
+            }
         }
 
         // IDIOMA
@@ -92,7 +111,21 @@ class SettingsActivity : AppCompatActivity() {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
+    }
 
+    private fun programarRecordatorio() {
+        val workRequest = PeriodicWorkRequestBuilder<ReminderWorker>(6, TimeUnit.HOURS)
+            .setInitialDelay(6, TimeUnit.HOURS) // Espera 6 horas antes de la primera ejecución
+            .build()
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+            "reminder_work",
+            androidx.work.ExistingPeriodicWorkPolicy.REPLACE,
+            workRequest
+        )
+    }
+
+    private fun cancelarRecordatorio() {
+        WorkManager.getInstance(this).cancelUniqueWork("reminder_work")
     }
 
     private fun updateLocale(context: Context, language: String): Context {
@@ -102,6 +135,13 @@ class SettingsActivity : AppCompatActivity() {
         config.setLocale(locale)
         return context.createConfigurationContext(config)
     }
+
+    //Para probar notifiaaciones
+    /*private fun probarNotificacion() {
+        val workRequest = OneTimeWorkRequestBuilder<ReminderWorker>().build()
+        WorkManager.getInstance(this@SettingsActivity).enqueue(workRequest)
+    }*/
+
 }
 
 

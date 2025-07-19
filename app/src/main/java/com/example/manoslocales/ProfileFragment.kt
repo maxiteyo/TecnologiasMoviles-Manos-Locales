@@ -1,13 +1,17 @@
 package com.example.manoslocales
 
 import android.app.DatePickerDialog
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import com.example.manoslocales.models.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import java.util.*
 
 class ProfileFragment : Fragment() {
@@ -22,6 +26,9 @@ class ProfileFragment : Fragment() {
     private lateinit var btnCerrarSesion: Button
     private lateinit var btnSettings: Button
 
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,7 +37,12 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        // Asignar vistas
+        super.onViewCreated(view, savedInstanceState)
+
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
+
+        // Asignar vistas (sin cambios)
         editTextNombre = view.findViewById(R.id.editTextNombre)
         editTextApellido = view.findViewById(R.id.editTextApellido)
         editTextFechaNacimiento = view.findViewById(R.id.editTextFechaNacimiento)
@@ -41,24 +53,16 @@ class ProfileFragment : Fragment() {
         btnCerrarSesion = view.findViewById(R.id.btnCerrarSesion)
         btnSettings = view.findViewById(R.id.btnSettings)
 
-        val prefs = requireContext().getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        cargarDatosDeUsuario()
 
-        // Cargar datos guardados
-        editTextNombre.setText(prefs.getString("nombre", "usuario"))
-        editTextApellido.setText(prefs.getString("apellido", "usuario"))
-        editTextFechaNacimiento.setText(prefs.getString("fechaNacimiento", "31/10/2000"))
-        editTextDNI.setText(prefs.getString("dni", "12345678"))
-        editTextTelefono.setText(prefs.getString("telefono", "3517892308"))
-        editTextEmail.setText(prefs.getString("email", "usuario@gmail.com"))
-
-        // DatePicker para fecha de nacimiento
+        // Listeners (sin cambios)
         editTextFechaNacimiento.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            val datePicker = DatePickerDialog(requireContext(),R.style.DatePickerTheme, { _, y, m, d ->
+            val datePicker = DatePickerDialog(requireContext(), R.style.DatePickerTheme, { _, y, m, d ->
                 val fecha = String.format("%02d/%02d/%04d", d, m + 1, y)
                 editTextFechaNacimiento.setText(fecha)
             }, year, month, day)
@@ -66,64 +70,100 @@ class ProfileFragment : Fragment() {
             datePicker.show()
         }
 
-        // Guardar cambios
         btnGuardar.setOnClickListener {
-            val nombre = editTextNombre.text.toString().trim()
-            val apellido = editTextApellido.text.toString().trim()
-            val fechaNacimiento = editTextFechaNacimiento.text.toString().trim()
-            val dni = editTextDNI.text.toString().trim()
-            val telefono = editTextTelefono.text.toString().trim()
-            val email = editTextEmail.text.toString().trim()
-
-            // Validaciones
-            when {
-                nombre.isEmpty() || apellido.isEmpty() || fechaNacimiento.isEmpty() || dni.isEmpty() || telefono.isEmpty() || email.isEmpty() -> {
-                    Toast.makeText(requireContext(), getString(R.string.completarcamposoblicatorios), Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-                dni.length != 8 || !dni.all { it.isDigit() } -> {
-                    Toast.makeText(requireContext(), getString(R.string.cantdigitosdni), Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-                telefono.length > 10 || !telefono.all { it.isDigit() } -> {
-                    Toast.makeText(requireContext(), getString(R.string.cantdigitostelefono), Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-                !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                    Toast.makeText(requireContext(), getString(R.string.correoinvalido), Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-            }
-
-            with(prefs.edit()) {
-                putString("nombre", nombre)
-                putString("apellido", apellido)
-                putString("fechaNacimiento", fechaNacimiento)
-                putString("dni", dni)
-                putString("telefono", telefono)
-                putString("email", email)
-                apply()
-            }
-
-            Toast.makeText(requireContext(), getString(R.string.datosguardados), Toast.LENGTH_SHORT).show()
+            guardarCambiosEnFirestore()
         }
 
-
-        // Acción cerrar sesión
         btnCerrarSesion.setOnClickListener {
-            // Limpia los datos (opcional)
-            prefs.edit().clear().apply()
-
-            // Ir a LoginActivity
-            val intent = android.content.Intent(requireContext(), LoginActivity::class.java)
-            intent.flags = android.content.Intent.FLAG_ACTIVITY_NEW_TASK or android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
+            auth.signOut()
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
 
-        // Ir a settings
         btnSettings.setOnClickListener {
-            val intent = android.content.Intent(requireContext(), SettingsActivity::class.java)
+            val intent = Intent(requireContext(), SettingsActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun cargarDatosDeUsuario() {
+        val currentUser = auth.currentUser
+        if (currentUser == null) {
+            Toast.makeText(context, "Error: Usuario no autenticado.", Toast.LENGTH_SHORT).show()
+            return
+        }
+        val userId = currentUser.uid
+
+        db.collection("users").document(userId).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    // El perfil existe, lo cargamos
+                    val user = document.toObject(User::class.java)
+                    user?.let {
+                        editTextNombre.setText(it.nombre)
+                        editTextApellido.setText(it.apellido)
+                        editTextFechaNacimiento.setText(it.fechaNacimiento)
+                        editTextDNI.setText(it.numeroDocumento)
+                        editTextTelefono.setText(it.telefono)
+                        editTextEmail.setText(it.email)
+                    }
+                } else {
+                    // El perfil NO existe. Pre-rellenamos el email y permitimos crearlo.
+                    Toast.makeText(context, "Completa tu perfil por primera vez.", Toast.LENGTH_SHORT).show()
+                    editTextEmail.setText(currentUser.email) // Rellenamos el email desde Auth
+                }
+                // El email nunca debe ser editable
+                editTextEmail.isEnabled = false
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(context, "Error al cargar datos: ${exception.localizedMessage}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun guardarCambiosEnFirestore() {
+        val userId = auth.currentUser?.uid ?: return
+
+        // Recolecta los datos de los EditText (sin cambios)
+        val nombre = editTextNombre.text.toString().trim()
+        val apellido = editTextApellido.text.toString().trim()
+        val fechaNacimiento = editTextFechaNacimiento.text.toString().trim()
+        val numeroDocumento = editTextDNI.text.toString().trim()
+        val telefono = editTextTelefono.text.toString().trim()
+        val email = editTextEmail.text.toString().trim() // Obtenemos el email también
+
+        // Validaciones (sin cambios)
+        if (nombre.isEmpty() || apellido.isEmpty() || fechaNacimiento.isEmpty() || numeroDocumento.isEmpty() || telefono.isEmpty()) {
+            Toast.makeText(requireContext(), getString(R.string.completarcamposoblicatorios), Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (numeroDocumento.length != 8 || !numeroDocumento.all { it.isDigit() }) {
+            Toast.makeText(requireContext(), getString(R.string.cantdigitosdni), Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (telefono.length > 10 || !telefono.all { it.isDigit() }) {
+            Toast.makeText(requireContext(), getString(R.string.cantdigitostelefono), Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Crea el mapa de datos para actualizar o crear
+        val datosUsuario = mapOf(
+            "nombre" to nombre,
+            "apellido" to apellido,
+            "fechaNacimiento" to fechaNacimiento,
+            "numeroDocumento" to numeroDocumento,
+            "telefono" to telefono,
+            "email" to email // Guardamos el email también
+        )
+
+        // Usamos .set con SetOptions.merge() para crear o actualizar el documento
+        db.collection("users").document(userId)
+            .set(datosUsuario, SetOptions.merge()) // CAMBIO CLAVE AQUÍ
+            .addOnSuccessListener {
+                Toast.makeText(context, getString(R.string.datosguardados), Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(context, "Error al guardar: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+            }
     }
 }

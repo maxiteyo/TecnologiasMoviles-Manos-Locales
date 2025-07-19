@@ -17,7 +17,7 @@ class ProductRepository(
 
     // 2. Función para actualizar la base de datos con datos de la red.
     // Es 'suspend' porque realiza operaciones de red y de base de datos.
-    suspend fun refreshProducts() {
+    /*suspend fun refreshProducts() {
         try {
             val favoriteProductIds = productDao.getAllProductsList()
                 .filter { it.isFavorite }
@@ -36,6 +36,25 @@ class ProductRepository(
             productDao.insertAll(mergedProducts)   // Inserta/actualiza los nuevos y existentes
 
             Log.d("ProductRepository", "Productos sincronizados en Room: ${mergedProducts.size}")
+
+        } catch (e: Exception) {
+            Log.e("ProductRepository", "Error al refrescar productos: ${e.message}", e)
+        }
+    }*/
+
+    suspend fun refreshProducts(favoriteProductIds: Set<String>) {
+        try {
+            // 1. Obtener los productos desde la API.
+            val productsFromApi = apiService.getAllProducts()
+
+            // 2. Fusionar las listas usando los IDs de favoritos de Firebase.
+            val mergedProducts = productsFromApi.map { apiProduct ->
+                apiProduct.copy(isFavorite = favoriteProductIds.contains(apiProduct.id))
+            }
+
+            // 3. Limpiar la base de datos e insertar la lista fusionada.
+            productDao.deleteAll()
+            productDao.insertAll(mergedProducts)
 
         } catch (e: Exception) {
             Log.e("ProductRepository", "Error al refrescar productos: ${e.message}", e)

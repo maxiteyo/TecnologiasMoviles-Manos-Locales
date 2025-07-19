@@ -24,5 +24,11 @@ interface ProductDao {
     suspend fun update(product: Product)
 
     @Query("DELETE FROM products WHERE id NOT IN (:ids)")
-    suspend fun deleteProductsNotIn(ids: List<Int>)
+    suspend fun deleteProductsNotIn(ids: List<String>)
+
+    @Query("DELETE FROM products")
+    suspend fun deleteAll()
+
+    @Query("SELECT id FROM products WHERE isFavorite = 1")
+    suspend fun getFavoriteProductIds(): List<String>
 }

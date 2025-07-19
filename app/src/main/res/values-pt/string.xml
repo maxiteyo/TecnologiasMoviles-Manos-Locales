@@ -112,5 +112,6 @@
     <string name="error">Erro: %1$s</string>
     <string name="intentalonuevo">Tente novamente</string>
     <string name="enviarenlace">Enviar link de recuperação</string>
+    <string name="email_no_registrado">O e-mail inserido não corresponde a uma conta registrada.</string>
 
 </resources>

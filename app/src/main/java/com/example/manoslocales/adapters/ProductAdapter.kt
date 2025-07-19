@@ -44,10 +44,16 @@ class ProductAdapter(
                 onProductClicked(product)
             }
 
-            binding.favoriteIcon.setOnClickListener {
+            /*binding.favoriteIcon.setOnClickListener {
                 val updatedProduct = product.copy(isFavorite = !product.isFavorite)
                 viewModel.updateProduct(updatedProduct)
+            }*/
+            // --- INICIO: CAMBIO CLAVE AQUÍ ---
+            // Llama al nuevo método del ViewModel en lugar de actualizar directamente.
+            binding.favoriteIcon.setOnClickListener {
+                viewModel.toggleFavorite(product)
             }
+            // --- FIN: CAMBIO CLAVE AQUÍ ---
         }
     }
 

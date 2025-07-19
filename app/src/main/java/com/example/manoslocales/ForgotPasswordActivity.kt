@@ -39,6 +39,7 @@ class ForgotPasswordActivity : ComponentActivity() {
     }
 }
 
+
 @Composable
 fun ForgotPasswordScreen() {
     val context = LocalContext.current
@@ -111,22 +112,41 @@ fun ForgotPasswordScreen() {
             Spacer(modifier = Modifier.height(24.dp))
 
             // Botón
-            val context = LocalContext.current
             Button(
                 onClick = {
                     if (email.isBlank()) {
                         message = context.getString(R.string.porfavoringresarcorreo)
+                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                     } else {
-                        FirebaseAuth.getInstance()
-                            .sendPasswordResetEmail(email)
+                        val auth = FirebaseAuth.getInstance()
+                        // 1. Verificar si el email existe
+                        auth.fetchSignInMethodsForEmail(email)
                             .addOnCompleteListener { task ->
-                                message = if (task.isSuccessful) {
-                                    context.getString(R.string.revisarcorreo)
+                                if (task.isSuccessful) {
+                                    val isNewUser = task.result?.signInMethods?.isEmpty() ?: true
+                                    if (isNewUser) {
+                                        // 2. Si el email NO existe, mostrar error
+                                        message = context.getString(R.string.email_no_registrado)
+                                        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+                                    } else {
+                                        // 3. Si el email SÍ existe, enviar correo de restablecimiento
+                                        auth.sendPasswordResetEmail(email)
+                                            .addOnCompleteListener { resetTask ->
+                                                message = if (resetTask.isSuccessful) {
+                                                    context.getString(R.string.revisarcorreo)
+                                                } else {
+                                                    val fallback = context.getString(R.string.intentalonuevo)
+                                                    context.getString(R.string.error, resetTask.exception?.localizedMessage ?: fallback)
+                                                }
+                                                Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+                                            }
+                                    }
                                 } else {
+                                    // Error al verificar el email
                                     val fallback = context.getString(R.string.intentalonuevo)
-                                    context.getString(R.string.error, task.exception?.localizedMessage ?: fallback)
+                                    message = context.getString(R.string.error, task.exception?.localizedMessage ?: fallback)
+                                    Toast.makeText(context, message, Toast.LENGTH_LONG).show()
                                 }
-                                Toast.makeText(context, message, Toast.LENGTH_LONG).show()
                             }
                     }
                 },

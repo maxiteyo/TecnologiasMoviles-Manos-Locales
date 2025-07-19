@@ -25,13 +25,22 @@
         android:id="@+id/productDetailFragment"
         android:name="com.example.manoslocales.ProductDetailFragment"
         android:label="Detalle">
-        <argument android:name="productId" app:argType="integer" />
+        <argument android:name="productId" app:argType="string" />
         <argument android:name="productName" app:argType="string" />
         <argument android:name="productDescription" app:argType="string" />
         <argument android:name="productCategory" app:argType="string" />
         <argument android:name="productPrice" app:argType="float" />
         <argument android:name="producerName" app:argType="string" />
         <argument android:name="productImageUrl" app:argType="string" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_homeFragment2"
+            app:destination="@id/homeFragment" />
 
     </fragment>
 

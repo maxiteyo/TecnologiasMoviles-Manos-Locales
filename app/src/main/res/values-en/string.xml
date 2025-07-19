@@ -113,5 +113,6 @@
     <string name="error">Mistake: %1$s</string>
     <string name="intentalonuevo">Try again</string>
     <string name="enviarenlace">Send recovery link</string>
+    <string name="email_no_registrado">The email entered does not correspond to a registered account.</string>
 
 </resources>

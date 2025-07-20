@@ -1,5 +1,7 @@
 package com.example.manoslocales
 
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -24,8 +26,25 @@ import androidx.compose.ui.unit.sp
 import com.example.manoslocales.ui.theme.ManosLocalesTheme
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
+import java.util.Locale
 
 class ForgotPasswordActivity : ComponentActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        val sharedPrefs = newBase.getSharedPreferences("app_settings", MODE_PRIVATE)
+        val language = sharedPrefs.getString("idioma_codigo", "es") ?: "es"
+        val localeUpdatedContext = updateLocale(newBase, language)
+        super.attachBaseContext(localeUpdatedContext)
+    }
+
+    private fun updateLocale(context: Context, language: String): Context {
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = Configuration(context.resources.configuration)
+        config.setLocale(locale)
+        return context.createConfigurationContext(config)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
@@ -38,6 +57,7 @@ class ForgotPasswordActivity : ComponentActivity() {
         }
     }
 }
+
 
 
 @Composable

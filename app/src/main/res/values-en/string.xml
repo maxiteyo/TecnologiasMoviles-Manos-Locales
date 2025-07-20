@@ -108,6 +108,7 @@
 
     <string name="registroexitoso">Successful Registration</string>
     <string name="restablecercontra">Reset password</string>
+    <string name="revisarcorreo_generico">If the email address is registered, you will receive a link to reset your password.</string>
     <string name="porfavoringresarcorreo">Please enter your email</string>
     <string name="revisarcorreo">Email sent. Check your inbox.</string>
     <string name="error">Mistake: %1$s</string>

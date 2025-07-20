@@ -107,6 +107,7 @@
 
     <string name="registroexitoso">Registro bem-sucedido</string>
     <string name="restablecercontra">Redefinir senha</string>
+    <string name="revisarcorreo_generico">Se o endereço de e-mail estiver registrado, você receberá um link para redefinir sua senha.</string>
     <string name="porfavoringresarcorreo">Por favor insira seu e-mail</string>
     <string name="revisarcorreo">E-mail enviado. Verifique sua caixa de entrada.</string>
     <string name="error">Erro: %1$s</string>

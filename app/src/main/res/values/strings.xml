@@ -113,6 +113,7 @@
     <!-- ForgotPasswordActivity -->
     <string name="registroexitoso">Registro exitoso</string>
     <string name="restablecercontra">Restablecer contraseña</string>
+    <string name="revisarcorreo_generico">Si la dirección de correo electrónico está registrada, recibirás un enlace para restablecer tu contraseña.</string>
     <string name="porfavoringresarcorreo">Por favor, ingresá tu correo</string>
     <string name="revisarcorreo">Correo enviado. Revisa tu bandeja de entrada.</string>
     <string name="error">Error: %1$s</string>

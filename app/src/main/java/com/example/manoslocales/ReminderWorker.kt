@@ -10,6 +10,7 @@ import androidx.core.app.NotificationCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 
+
 class ReminderWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
     override fun doWork(): Result {
         val sharedPrefs = applicationContext.getSharedPreferences("app_settings", Context.MODE_PRIVATE)

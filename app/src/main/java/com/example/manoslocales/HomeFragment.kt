@@ -21,6 +21,11 @@ import com.example.manoslocales.databinding.FragmentHomeBinding
 import com.example.manoslocales.ui.ProductViewModel
 import com.example.manoslocales.ui.ProductViewModelFactory
 import kotlinx.coroutines.launch
+import android.app.Activity
+import android.content.Intent
+import android.speech.RecognizerIntent
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 
 class HomeFragment : Fragment() {
 
@@ -32,6 +37,20 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var productAdapter: ProductAdapter
+
+    private val speechRecognizerLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            val spokenText = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0)
+
+            if (!spokenText.isNullOrEmpty()) {
+                // Actualiza el SearchView y el ViewModel con el texto reconocido
+                binding.searchView.setQuery(spokenText, true) // El 'true' ejecuta la búsqueda
+            }
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -46,6 +65,7 @@ class HomeFragment : Fragment() {
         setupSearchView()
         setupSwipeRefresh()
         setupBackButton()
+        setupVoiceSearch()
         binding.searchView.setIconifiedByDefault(false)
         binding.searchView.isIconified = false
 
@@ -56,6 +76,35 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun setupVoiceSearch() {
+        binding.voiceSearchButton.setOnClickListener {
+            val speechIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+                putExtra(RecognizerIntent.EXTRA_PROMPT, "Habla para buscar productos...")
+            }
+            // Lanza la actividad de reconocimiento de voz
+            try {
+                speechRecognizerLauncher.launch(speechIntent)
+            } catch (e: Exception) {
+                // Maneja el caso en que el reconocimiento de voz no esté disponible
+                Toast.makeText(requireContext(), "El reconocimiento de voz no está disponible.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun setupSearchView() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.setSearchQuery(query.orEmpty())
+                return true // Cambiado a true para manejar el submit
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.setSearchQuery(newText.orEmpty())
+                return true
+            }
+        })
     }
 
     private fun setupRecyclerView() {
@@ -90,7 +139,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setupSearchView() {
+    /*private fun setupSearchView() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean = false
             override fun onQueryTextChange(newText: String?): Boolean {
@@ -98,7 +147,7 @@ class HomeFragment : Fragment() {
                 return true
             }
         })
-    }
+    }*/
 
     private fun setupSwipeRefresh() {
         binding.swipeRefreshLayout.setOnRefreshListener {

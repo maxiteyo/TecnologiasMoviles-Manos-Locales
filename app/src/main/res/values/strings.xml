@@ -77,6 +77,7 @@
     <string name="textiles">Textiles</string>
     <string name="artesanias">Artesanías</string>
     <string name="cosmeticanatural">Cosmética Natural</string>
+    <string name="busqueda_por_voz">Búsqueda por voz</string>
 
     <!-- Register Activity-->
     <string name="nueva_cuenta">Nueva Cuenta</string>

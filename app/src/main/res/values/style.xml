@@ -44,4 +44,10 @@
         <item name="android:backgroundTint">@color/blancocrema</item>
     </style>
 
+    <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColorPrimary">@color/verdeoscuro</item>
+        <item name="android:textColorHint">@color/verdeoscuro</item>
+        <item name="android:tint">@color/verdeoscuro</item>
+    </style>
+
 </resources>

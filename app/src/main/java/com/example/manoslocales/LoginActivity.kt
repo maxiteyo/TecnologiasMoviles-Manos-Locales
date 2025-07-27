@@ -5,8 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.manoslocales.databinding.ActivityLoginBinding
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -14,14 +12,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
-import kotlin.or
-import kotlin.toString
-
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    // Declara la variable de Firebase Auth
     private lateinit var auth: FirebaseAuth
 
     override fun attachBaseContext(newBase: Context) {
@@ -29,7 +23,6 @@ class LoginActivity : AppCompatActivity() {
         val context = LocaleHelper.setLocale(newBase, lang)
         super.attachBaseContext(context)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -39,7 +32,6 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inicializa Firebase Auth
         auth = Firebase.auth
 
         binding.botonLogin.setOnClickListener {

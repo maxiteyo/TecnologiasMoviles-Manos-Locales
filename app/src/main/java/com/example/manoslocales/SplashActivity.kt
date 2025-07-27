@@ -6,8 +6,6 @@ import android.os.Handler
 import android.os.Looper
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class SplashActivity : AppCompatActivity() {
 
@@ -22,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
             // Navegar al LoginActivity
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish() // Cierra esta actividad para que no vuelva al presionar "Back"
+            finish()
         }, splashTime)
     }
 

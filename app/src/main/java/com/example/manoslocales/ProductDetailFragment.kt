@@ -29,13 +29,11 @@ class ProductDetailFragment : Fragment() {
         view.findViewById<TextView>(R.id.textViewDetailCategory).text = getString(R.string.categoria_spinner, args.productCategory)
         view.findViewById<TextView>(R.id.textViewDetailProducer).text = getString(R.string.productor_spinner, args.producerName)
 
-        // Se obtiene la referencia al ImageView
         val imageView = view.findViewById<ImageView>(R.id.ImageProduct)
 
-        // Se usa Glide para cargar la imagen desde la URL
         Glide.with(this)
-            .load(args.productImageUrl) // Usa el argumento correcto 'productImageUrl'
-            .into(imageView) // Carga la imagen en el ImageView
+            .load(args.productImageUrl)
+            .into(imageView)
 
         return view
     }
@@ -48,33 +46,30 @@ class ProductDetailFragment : Fragment() {
         val shareButton = view.findViewById<ImageButton>(R.id.btnShare)
 
         instagramButton.setOnClickListener {
-            // Lanza una corrutina para llamar a la función suspendida
             lifecycleScope.launch {
                 shareOnInstagram(requireContext(), args.productImageUrl)
             }
         }
 
         whatsAppButton.setOnClickListener {
-            // Lanza una corrutina para llamar a la función suspendida
             lifecycleScope.launch {
                 shareOnWhatsApp(
                     context = requireContext(),
                     productName = args.productName,
                     productDescription = args.productDescription,
-                    producerName = args.producerName, // Pasa el nombre del productor
+                    producerName = args.producerName,
                     productImageUrl = args.productImageUrl
                 )
             }
         }
 
         shareButton.setOnClickListener {
-            // Lanza una corrutina para llamar a la función suspendida
             lifecycleScope.launch {
                 shareGeneric(
                     context = requireContext(),
                     productName = args.productName,
                     productDescription = args.productDescription,
-                    producerName = args.producerName, // Pasa el nombre del productor
+                    producerName = args.producerName,
                     productImageUrl = args.productImageUrl
                 )
             }

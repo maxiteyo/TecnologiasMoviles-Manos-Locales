@@ -3,13 +3,9 @@ package com.example.manoslocales.models
 import com.google.firebase.firestore.IgnoreExtraProperties
 import com.google.firebase.firestore.PropertyName
 
-/**
- * Representa la estructura completa de un documento de usuario en Firestore.
- * Incluye campos para usuarios estándar y campos opcionales para emprendedores.
- */
 @IgnoreExtraProperties
 data class User(
-    // --- Campos comunes para todos los usuarios ---
+
     @get:PropertyName("nombre") @set:PropertyName("nombre")
     var nombre: String = "",
 
@@ -34,11 +30,9 @@ data class User(
     @get:PropertyName("codigoPostal") @set:PropertyName("codigoPostal")
     var codigoPostal: String = "",
 
-    // --- Campo para diferenciar el tipo de perfil ---
     @get:PropertyName("esEmprendedor") @set:PropertyName("esEmprendedor")
     var esEmprendedor: Boolean = false,
 
-    // --- Campos específicos para Emprendedores (opcionales) ---
     @get:PropertyName("nombreEmprendimiento") @set:PropertyName("nombreEmprendimiento")
     var nombreEmprendimiento: String? = null,
 
@@ -51,6 +45,5 @@ data class User(
     @get:PropertyName("telefono") @set:PropertyName("telefono")
     var telefono: String? = null
 ) {
-    // Constructor vacío requerido por Firestore para la deserialización
     constructor() : this("", "", "", "", "", "", "", "", false, null, null, null, null)
 }

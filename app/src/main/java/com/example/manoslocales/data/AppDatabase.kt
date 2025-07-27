@@ -6,7 +6,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.manoslocales.models.Product
 
-// 1. Incrementa la versión a 2
 @Database(entities = [Product::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -23,7 +22,6 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "manos_locales_database"
                 )
-                    // 2. Añade esta línea para manejar la migración automáticamente
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance

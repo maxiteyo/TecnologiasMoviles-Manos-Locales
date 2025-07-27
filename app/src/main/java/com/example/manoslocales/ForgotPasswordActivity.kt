@@ -58,8 +58,6 @@ class ForgotPasswordActivity : ComponentActivity() {
     }
 }
 
-
-
 @Composable
 fun ForgotPasswordScreen() {
     val context = LocalContext.current
@@ -138,23 +136,16 @@ fun ForgotPasswordScreen() {
                         message = context.getString(R.string.porfavoringresarcorreo)
                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                     } else {
-                        // --- INICIO DEL CAMBIO ---
-                        // Ya no verificamos si el email existe.
-                        // Llamamos directamente a sendPasswordResetEmail.
                         FirebaseAuth.getInstance().sendPasswordResetEmail(email)
                             .addOnCompleteListener { task ->
-                                // Por seguridad, siempre mostramos un mensaje genérico.
-                                // Firebase no te dirá si el correo existía o no.
                                 if (task.isSuccessful) {
-                                    message = context.getString(R.string.revisarcorreo_generico) // Necesitarás crear este string
+                                    message = context.getString(R.string.revisarcorreo_generico)
                                 } else {
-                                    // Este error solo se muestra si el email tiene un formato inválido o hay un problema de red.
                                     val fallback = context.getString(R.string.intentalonuevo)
                                     message = context.getString(R.string.error, task.exception?.localizedMessage ?: fallback)
                                 }
                                 Toast.makeText(context, message, Toast.LENGTH_LONG).show()
                             }
-                        // --- FIN DEL CAMBIO ---
                     }
                 },
                 modifier = Modifier

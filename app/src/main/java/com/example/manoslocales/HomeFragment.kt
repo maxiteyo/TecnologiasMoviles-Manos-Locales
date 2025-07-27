@@ -16,7 +16,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.manoslocales.adapters.ProductAdapter
 import com.example.manoslocales.databinding.FragmentHomeBinding
 import com.example.manoslocales.ui.ProductViewModel
@@ -44,7 +43,6 @@ class HomeFragment : Fragment() {
 
     private lateinit var productAdapter: ProductAdapter
 
-    // Launcher para el resultado del reconocimiento de voz
     private val speechRecognizerLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -53,8 +51,7 @@ class HomeFragment : Fragment() {
             val spokenText = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0)
 
             if (!spokenText.isNullOrEmpty()) {
-                // Actualiza el SearchView y el ViewModel con el texto reconocido
-                binding.searchView.setQuery(spokenText, true) // El 'true' ejecuta la búsqueda
+                binding.searchView.setQuery(spokenText, true)
             }
         }
     }
@@ -96,6 +93,8 @@ class HomeFragment : Fragment() {
         setupNotificationPermission()
         binding.searchView.setIconifiedByDefault(false)
         binding.searchView.isIconified = false
+        binding.searchView.clearFocus()
+        binding.root.requestFocus()
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -205,16 +204,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    /*private fun setupSearchView() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean = false
-            override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.setSearchQuery(newText.orEmpty())
-                return true
-            }
-        })
-    }*/
-
     private fun setupSwipeRefresh() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.refreshProducts()
@@ -230,7 +219,6 @@ class HomeFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    // No hace nada (bloquea "volver")
                 }
             }
         )

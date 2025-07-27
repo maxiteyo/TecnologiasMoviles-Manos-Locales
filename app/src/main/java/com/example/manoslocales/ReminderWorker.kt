@@ -25,7 +25,6 @@ class ReminderWorker(appContext: Context, workerParams: WorkerParameters) : Work
             notificationManager.createNotificationChannel(channel)
         }
 
-        // Intent para abrir SplashActivity al tocar la notificación
         val intent = Intent(applicationContext, SplashActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }

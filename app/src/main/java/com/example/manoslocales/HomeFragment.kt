@@ -15,7 +15,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.manoslocales.adapters.ProductAdapter
 import com.example.manoslocales.databinding.FragmentHomeBinding
 import com.example.manoslocales.ui.ProductViewModel
@@ -46,8 +45,7 @@ class HomeFragment : Fragment() {
             val spokenText = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)?.get(0)
 
             if (!spokenText.isNullOrEmpty()) {
-                // Actualiza el SearchView y el ViewModel con el texto reconocido
-                binding.searchView.setQuery(spokenText, true) // El 'true' ejecuta la búsqueda
+                binding.searchView.setQuery(spokenText, true)
             }
         }
     }
@@ -68,6 +66,8 @@ class HomeFragment : Fragment() {
         setupVoiceSearch()
         binding.searchView.setIconifiedByDefault(false)
         binding.searchView.isIconified = false
+        binding.searchView.clearFocus()
+        binding.root.requestFocus()
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -84,7 +84,6 @@ class HomeFragment : Fragment() {
                 putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
                 putExtra(RecognizerIntent.EXTRA_PROMPT, "Habla para buscar productos...")
             }
-            // Lanza la actividad de reconocimiento de voz
             try {
                 speechRecognizerLauncher.launch(speechIntent)
             } catch (e: Exception) {
@@ -98,7 +97,7 @@ class HomeFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.setSearchQuery(query.orEmpty())
-                return true // Cambiado a true para manejar el submit
+                return true
             }
             override fun onQueryTextChange(newText: String?): Boolean {
                 viewModel.setSearchQuery(newText.orEmpty())
@@ -139,16 +138,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    /*private fun setupSearchView() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean = false
-            override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.setSearchQuery(newText.orEmpty())
-                return true
-            }
-        })
-    }*/
-
     private fun setupSwipeRefresh() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.refreshProducts()
@@ -164,7 +153,6 @@ class HomeFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    // No hace nada (bloquea "volver")
                 }
             }
         )

@@ -43,9 +43,7 @@ class FavoritesFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                // Observamos el flow del ViewModel.
                 viewModel.filteredProducts.collect { allProducts ->
-                    // Filtramos la lista para mostrar ÚNICAMENTE los favoritos.
                     val favoriteProducts = allProducts.filter { it.isFavorite }
                     productAdapter.submitList(favoriteProducts)
                 }

@@ -1,4 +1,3 @@
-// En app/src/main/java/com/example/manoslocales/ui/ProductViewModel.kt
 package com.example.manoslocales.ui
 
 import android.util.Log
@@ -20,10 +19,8 @@ class ProductViewModel(private val repository: ProductRepository) : ViewModel() 
     private val db = FirebaseFirestore.getInstance()
 
     private val _searchQuery = MutableStateFlow("")
-    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
 
     private val _selectedCategory = MutableStateFlow("Todas")
-    val selectedCategory: StateFlow<String> = _selectedCategory.asStateFlow()
 
     private val _productsState = MutableStateFlow<List<Product>>(emptyList())
 
@@ -49,13 +46,10 @@ class ProductViewModel(private val repository: ProductRepository) : ViewModel() 
         refreshProducts()
     }
 
-    // --- INICIO DEL CAMBIO ---
-
     fun toggleFavorite(product: Product) {
         val userId = auth.currentUser?.uid ?: return
         val newFavoriteState = !product.isFavorite
 
-        // 1. Actualización optimista (sigue igual)
         _productsState.update { currentProducts ->
             currentProducts.map {
                 if (it.id == product.id) it.copy(isFavorite = newFavoriteState) else it
@@ -66,7 +60,6 @@ class ProductViewModel(private val repository: ProductRepository) : ViewModel() 
             val favoriteRef = db.collection("users").document(userId)
                 .collection("favorites").document(product.id)
             try {
-                // 2. Operación en Firebase
                 if (newFavoriteState) {
                     favoriteRef.set(mapOf("addedAt" to System.currentTimeMillis())).await()
                     Log.d("ProductViewModel", "Producto ${product.id} añadido a favoritos en Firebase.")
@@ -75,14 +68,10 @@ class ProductViewModel(private val repository: ProductRepository) : ViewModel() 
                     Log.d("ProductViewModel", "Producto ${product.id} eliminado de favoritos en Firebase.")
                 }
 
-                // 3. ÉXITO: Actualizamos el producto en la base de datos local (Room).
-                // Esto es mucho más eficiente que un refresh completo.
-                // El colector en `init` se encargará de que la UI refleje este cambio persistente.
                 val updatedProduct = product.copy(isFavorite = newFavoriteState)
                 repository.updateProduct(updatedProduct)
 
             } catch (e: Exception) {
-                // 4. ERROR: Si Firebase falla, lo registramos y revertimos el cambio en la UI.
                 Log.e("ProductViewModel", "ERROR en Firebase al actualizar favorito para ${product.id}", e)
                 _productsState.update { currentProducts ->
                     currentProducts.map {
@@ -93,8 +82,6 @@ class ProductViewModel(private val repository: ProductRepository) : ViewModel() 
             }
         }
     }
-
-    // --- FIN DEL CAMBIO ---
 
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()

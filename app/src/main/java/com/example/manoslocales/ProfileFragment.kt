@@ -42,7 +42,6 @@ class ProfileFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        // Asignar vistas (sin cambios)
         editTextNombre = view.findViewById(R.id.editTextNombre)
         editTextApellido = view.findViewById(R.id.editTextApellido)
         editTextFechaNacimiento = view.findViewById(R.id.editTextFechaNacimiento)
@@ -55,7 +54,6 @@ class ProfileFragment : Fragment() {
 
         cargarDatosDeUsuario()
 
-        // Listeners (sin cambios)
         editTextFechaNacimiento.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
@@ -98,7 +96,6 @@ class ProfileFragment : Fragment() {
         db.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
-                    // El perfil existe, lo cargamos
                     val user = document.toObject(User::class.java)
                     user?.let {
                         editTextNombre.setText(it.nombre)
@@ -109,11 +106,9 @@ class ProfileFragment : Fragment() {
                         editTextEmail.setText(it.email)
                     }
                 } else {
-                    // El perfil NO existe. Pre-rellenamos el email y permitimos crearlo.
                     Toast.makeText(context, "Completa tu perfil por primera vez.", Toast.LENGTH_SHORT).show()
-                    editTextEmail.setText(currentUser.email) // Rellenamos el email desde Auth
+                    editTextEmail.setText(currentUser.email)
                 }
-                // El email nunca debe ser editable
                 editTextEmail.isEnabled = false
             }
             .addOnFailureListener { exception ->
@@ -124,15 +119,13 @@ class ProfileFragment : Fragment() {
     private fun guardarCambiosEnFirestore() {
         val userId = auth.currentUser?.uid ?: return
 
-        // Recolecta los datos de los EditText (sin cambios)
         val nombre = editTextNombre.text.toString().trim()
         val apellido = editTextApellido.text.toString().trim()
         val fechaNacimiento = editTextFechaNacimiento.text.toString().trim()
         val numeroDocumento = editTextDNI.text.toString().trim()
         val telefono = editTextTelefono.text.toString().trim()
-        val email = editTextEmail.text.toString().trim() // Obtenemos el email también
+        val email = editTextEmail.text.toString().trim()
 
-        // Validaciones (sin cambios)
         if (nombre.isEmpty() || apellido.isEmpty() || fechaNacimiento.isEmpty() || numeroDocumento.isEmpty() || telefono.isEmpty()) {
             Toast.makeText(requireContext(), getString(R.string.completarcamposoblicatorios), Toast.LENGTH_SHORT).show()
             return
@@ -146,19 +139,17 @@ class ProfileFragment : Fragment() {
             return
         }
 
-        // Crea el mapa de datos para actualizar o crear
         val datosUsuario = mapOf(
             "nombre" to nombre,
             "apellido" to apellido,
             "fechaNacimiento" to fechaNacimiento,
             "numeroDocumento" to numeroDocumento,
             "telefono" to telefono,
-            "email" to email // Guardamos el email también
+            "email" to email
         )
 
-        // Usamos .set con SetOptions.merge() para crear o actualizar el documento
         db.collection("users").document(userId)
-            .set(datosUsuario, SetOptions.merge()) // CAMBIO CLAVE AQUÍ
+            .set(datosUsuario, SetOptions.merge())
             .addOnSuccessListener {
                 Toast.makeText(context, getString(R.string.datosguardados), Toast.LENGTH_SHORT).show()
             }

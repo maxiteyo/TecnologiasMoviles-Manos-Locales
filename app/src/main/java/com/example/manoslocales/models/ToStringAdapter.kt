@@ -21,10 +21,8 @@ class ToStringAdapter : TypeAdapter<String>() {
         val peek = `in`.peek()
         if (peek == JsonToken.NULL) {
             `in`.nextNull()
-            // Devuelve un String vacío si el JSON es nulo, ya que el ID no puede ser nulo
             return ""
         }
-        // Acepta números, booleanos o strings y los convierte a String
         return `in`.nextString()
     }
 }

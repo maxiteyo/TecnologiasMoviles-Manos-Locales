@@ -32,7 +32,6 @@ class ProductAdapter(
             binding.textViewProductPrice.text = "$${product.price}"
             Glide.with(binding.root.context).load(product.imageUrl).into(binding.imageProduct)
 
-            // CORRECCIÓN: Se restaura la lógica para cambiar el ícono usando los nombres que proporcionaste.
             val favoriteIconResource = if (product.isFavorite) {
                 R.drawable.ic_favorite // Ícono de estrella llena
             } else {
@@ -43,17 +42,10 @@ class ProductAdapter(
             binding.root.setOnClickListener {
                 onProductClicked(product)
             }
-
-            /*binding.favoriteIcon.setOnClickListener {
-                val updatedProduct = product.copy(isFavorite = !product.isFavorite)
-                viewModel.updateProduct(updatedProduct)
-            }*/
-            // --- INICIO: CAMBIO CLAVE AQUÍ ---
             // Llama al nuevo método del ViewModel en lugar de actualizar directamente.
             binding.favoriteIcon.setOnClickListener {
                 viewModel.toggleFavorite(product)
             }
-            // --- FIN: CAMBIO CLAVE AQUÍ ---
         }
     }
 

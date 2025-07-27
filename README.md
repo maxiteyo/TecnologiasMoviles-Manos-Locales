@@ -98,3 +98,9 @@
   <li>🏗️ <strong>Arquitectura:</strong> Uso conjunto de Activities, Fragments y Jetpack Compose en una única vista principal.</li>
 </ul>
 
+<h2>📨 Contacto</h2>
+<p>📧 <strong>Equipo de desarrollo:</strong></p>
+<ul>
+  <li><strong>Maximo Teyo:</strong> <a href="mailto:maxiiteyo@gmail.com">maxiiteyo@gmail.com</a></li>
+  <li><strong>Sofía Milagros Suppia:</strong> <a href="mailto:sofimisuppia@gmail.com">sofimisuppia@gmail.com</a></li>
+</ul>

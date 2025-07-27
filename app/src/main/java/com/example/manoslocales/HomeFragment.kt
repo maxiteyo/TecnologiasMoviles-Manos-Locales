@@ -1,5 +1,6 @@
 package com.example.manoslocales
 
+import android.Manifest
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,11 @@ import android.content.Intent
 import android.speech.RecognizerIntent
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.core.content.ContextCompat
+import kotlin.toString
 
 class HomeFragment : Fragment() {
 
@@ -38,6 +44,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var productAdapter: ProductAdapter
 
+    // Launcher para el resultado del reconocimiento de voz
     private val speechRecognizerLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -49,6 +56,26 @@ class HomeFragment : Fragment() {
                 // Actualiza el SearchView y el ViewModel con el texto reconocido
                 binding.searchView.setQuery(spokenText, true) // El 'true' ejecuta la búsqueda
             }
+        }
+    }
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            launchVoiceSearch()
+        } else {
+            Toast.makeText(requireContext(), "Permiso de micrófono necesario para la búsqueda por voz.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private val requestNotificationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            Toast.makeText(requireContext(), "Gracias. Las notificaciones están activadas.", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), "No se podrán mostrar notificaciones.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -66,6 +93,7 @@ class HomeFragment : Fragment() {
         setupSwipeRefresh()
         setupBackButton()
         setupVoiceSearch()
+        setupNotificationPermission()
         binding.searchView.setIconifiedByDefault(false)
         binding.searchView.isIconified = false
 
@@ -78,19 +106,57 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // FUNCIÓN para manejar el permiso de notificaciones ---
+    private fun setupNotificationPermission() {
+        val sharedPreferences = requireActivity().getSharedPreferences("app_settings", Context.MODE_PRIVATE)
+        val areNotificationsEnabledInSettings = sharedPreferences.getBoolean("notifications_enabled", true)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && areNotificationsEnabledInSettings) {
+            when {
+                ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) == PackageManager.PERMISSION_GRANTED -> {
+                }
+                else -> {
+                    requestNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
+            }
+        }
+    }
+
     private fun setupVoiceSearch() {
         binding.voiceSearchButton.setOnClickListener {
-            val speechIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-                putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-                putExtra(RecognizerIntent.EXTRA_PROMPT, "Habla para buscar productos...")
+            val sharedPreferences = requireActivity().getSharedPreferences("app_settings", Context.MODE_PRIVATE)
+            val isVoiceSearchEnabledInSettings = sharedPreferences.getBoolean("voice_search_enabled", true)
+
+            if (isVoiceSearchEnabledInSettings) {
+                when {
+                    ContextCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.RECORD_AUDIO
+                    ) == android.content.pm.PackageManager.PERMISSION_GRANTED -> {
+                        launchVoiceSearch()
+                    }
+                    else -> {
+                        requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+                    }
+                }
+            } else {
+                Toast.makeText(requireContext(), "La búsqueda por voz está desactivada en los ajustes.", Toast.LENGTH_SHORT).show()
             }
-            // Lanza la actividad de reconocimiento de voz
-            try {
-                speechRecognizerLauncher.launch(speechIntent)
-            } catch (e: Exception) {
-                // Maneja el caso en que el reconocimiento de voz no esté disponible
-                Toast.makeText(requireContext(), "El reconocimiento de voz no está disponible.", Toast.LENGTH_SHORT).show()
-            }
+        }
+    }
+
+    private fun launchVoiceSearch() {
+        val speechIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            putExtra(RecognizerIntent.EXTRA_PROMPT, "Habla para buscar productos...")
+        }
+        try {
+            speechRecognizerLauncher.launch(speechIntent)
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), "El reconocimiento de voz no está disponible en este dispositivo.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -98,7 +164,7 @@ class HomeFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.setSearchQuery(query.orEmpty())
-                return true // Cambiado a true para manejar el submit
+                return true
             }
             override fun onQueryTextChange(newText: String?): Boolean {
                 viewModel.setSearchQuery(newText.orEmpty())

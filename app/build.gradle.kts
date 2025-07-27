@@ -108,6 +108,8 @@ dependencies {
 
     implementation ("androidx.work:work-runtime-ktx:2.9.0")
 
+    implementation ("androidx.preference:preference-ktx:1.2.1")
+
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
 }

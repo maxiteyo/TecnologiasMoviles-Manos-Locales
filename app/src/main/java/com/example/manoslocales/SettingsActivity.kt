@@ -83,6 +83,16 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
 
+        // BÚSQUEDA POR VOZ
+        val isVoiceSearchEnabled = sharedPrefs.getBoolean("voice_search_enabled", true)
+        binding.switchVoiceSearch.isChecked = isVoiceSearchEnabled
+
+        binding.switchVoiceSearch.setOnCheckedChangeListener { _, isChecked ->
+            sharedPrefs.edit().putBoolean("voice_search_enabled", isChecked).apply()
+            val msg = if (isChecked) "Búsqueda por voz activada" else "Búsqueda por voz desactivada"
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        }
+
         // IDIOMA
         val idiomas = resources.getStringArray(R.array.idiomas_array).toList()
         val codigos = listOf("es", "en", "pt")

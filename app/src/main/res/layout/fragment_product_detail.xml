@@ -124,7 +124,8 @@
             android:adjustViewBounds="true"
             android:scaleType="fitStart"
             android:padding="8dp"
-            android:src="@drawable/ic_instagram" />
+            android:src="@drawable/ic_instagram"
+            android:background="@android:color/transparent"/>
 
         <ImageButton
             android:id="@+id/btnWp"
@@ -134,7 +135,8 @@
             android:adjustViewBounds="true"
             android:scaleType="fitStart"
             android:padding="8dp"
-            android:src="@drawable/ic_wp" />
+            android:src="@drawable/ic_wp"
+            android:background="@android:color/transparent"/>
 
         <ImageButton
             android:id="@+id/btnShare"
@@ -144,7 +146,8 @@
             android:adjustViewBounds="true"
             android:scaleType="fitStart"
             android:padding="8dp"
-            android:src="@drawable/ic_share" />
+            android:src="@drawable/ic_share"
+            android:background="@android:color/transparent"/>
     </LinearLayout>
 
 

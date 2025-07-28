@@ -34,6 +34,13 @@ class LoginActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
+        val sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val savedEmail = sharedPref.getString("SAVED_EMAIL", null)
+        if (savedEmail != null) {
+            binding.inputMail.setText(savedEmail)
+            binding.checkbox.isChecked = true
+        }
+
         binding.botonLogin.setOnClickListener {
             val email = binding.inputMail.text.toString().trim()
             val password = binding.inputPassword.text.toString()
@@ -63,6 +70,23 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
+                        // --- INICIO DEL CÓDIGO A AGREGAR ---
+
+                        // Lógica de "Recuérdame"
+                        val sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+                        with(sharedPref.edit()) {
+                            if (binding.checkbox.isChecked) {
+                                // Si está marcado, guarda el email
+                                putString("SAVED_EMAIL", email)
+                            } else {
+                                // Si no está marcado, borra cualquier email guardado
+                                remove("SAVED_EMAIL")
+                            }
+                            apply() // Aplica los cambios
+                        }
+
+                        // --- FIN DEL CÓDIGO A AGREGAR ---
+
                         // Login exitoso
                         Toast.makeText(this, "Login exitoso.", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, MainActivity::class.java)

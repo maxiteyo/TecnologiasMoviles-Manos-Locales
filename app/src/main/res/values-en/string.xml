@@ -49,6 +49,7 @@
         <item>English</item>
         <item>Portuguese</item>
     </string-array>
+    <string name="contactar_al_desarrollador">Contact the developer</string>
 
     <string name="perfil">Profile</string>
     <string name="cerrar_sesi_n">Log out</string>

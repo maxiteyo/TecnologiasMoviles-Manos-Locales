@@ -62,6 +62,10 @@
     <queries>
         <package android:name="com.whatsapp" />
         <package android:name="com.instagram.android" />
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+            <data android:scheme="mailto" />
+        </intent>
     </queries>
 
 </manifest>

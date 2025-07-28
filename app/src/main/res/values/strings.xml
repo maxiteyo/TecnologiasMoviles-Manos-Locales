@@ -72,6 +72,15 @@
         <item>Artesanías</item>
         <item>Cosmética Natural</item>
     </string-array>
+
+    <string-array name="categorias_array_es">
+        <item>Todas</item>
+        <item>Alimentos</item>
+        <item>Textiles</item>
+        <item>Artesanías</item>
+        <item>Cosmética Natural</item>
+    </string-array>
+
     <string name="todas">Todas</string>
     <string name="alimentos">Alimentos</string>
     <string name="textiles">Textiles</string>

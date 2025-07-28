@@ -190,15 +190,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupSpinner() {
-        val categories = resources.getStringArray(R.array.categorias_array)
-        val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.spinner, categories).also {
+        val categoriasTraducidas = resources.getStringArray(R.array.categorias_array)
+        val categoriasOriginales = resources.getStringArray(R.array.categorias_array_es) // Solo existe en español
+
+        val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.spinner, categoriasTraducidas).also {
             it.setDropDownViewResource(R.layout.spinner_dropdown)
         }
         binding.spinnerCategory.adapter = spinnerAdapter
         binding.spinnerCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val selectedCategory = parent.getItemAtPosition(position).toString()
-                viewModel.setSelectedCategory(if (selectedCategory == getString(R.string.todas)) "Todas" else selectedCategory)
+                val categoriaParaFiltrar = categoriasOriginales[position]
+                viewModel.setSelectedCategory(categoriaParaFiltrar)
             }
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }

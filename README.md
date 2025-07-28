@@ -51,7 +51,7 @@
   <li>📋 <strong>Detalles completos:</strong> Información del producto o emprendimiento: nombre, ubicación, descripción, fotos y formas de contacto.</li>
   <li>⭐ <strong>Favoritos:</strong> Marcado de productos con sistema de notificaciones de novedades.</li>
   <li>📤 <strong>Compartir:</strong> Posibilidad de compartir información vía WhatsApp u otras redes sociales.</li>
-  <li>⚙️ <strong>Configuraciones:</strong> Ajuste de preferencias de idioma, notificaciones y tema (oscuro o claro).</li>
+  <li>⚙️ <strong>Configuraciones:</strong> Ajuste de preferencias de idioma, notificaciones, comunicación con soporte y tema (oscuro o claro).</li>
 </ul>
 
 <h2>🎯 Objetivo del Proyecto</h2>
@@ -73,7 +73,7 @@
       <li>Pantalla de bienvenida (Splash) con logo y carga inicial.</li>
       <li>Pantallas de login, registro y recuperación de contraseña.</li>
       <li>Pantalla principal con listado de productos.</li>
-      <li>Pantalla de detalle de producto o emprendedor.</li>
+      <li>Pantalla de detalle de producto</li>
       <li>Pantalla de configuraciones (Settings).</li>
     </ul>
   </li>
@@ -82,9 +82,10 @@
       <li>Navegación fluida con Navigation Compose y manejo de Fragments.</li>
       <li>Búsqueda por texto y voz (speech-to-text).</li>
       <li>Favoritos con sistema de notificaciones.</li>
-      <li>Conexión a API externa para datos dinámicos.</li>
+      <li>Conexión a API externa para datos dinámicos (implementado con Retrofit y Mockoon para los endpoints).</li>
       <li>Manejo de permisos (ubicación, micrófono, etc.).</li>
       <li>Envío de correo mediante Intents.</li>
+      <li>Base de datos local (implementado con la libreria Room).</li>
     </ul>
   </li>
 </ul>

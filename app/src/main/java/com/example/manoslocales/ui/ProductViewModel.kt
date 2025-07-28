@@ -12,6 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.text.Normalizer
+import java.util.Locale
 
 
 class ProductViewModel(private val repository: ProductRepository) : ViewModel() {
@@ -27,9 +29,10 @@ class ProductViewModel(private val repository: ProductRepository) : ViewModel() 
 
     val filteredProducts: StateFlow<List<Product>> =
         combine(_productsState, _searchQuery, _selectedCategory) { products, query, category ->
+            val queryNormalizada = query.normalizar()
             products.filter { product ->
                 val matchesCategory = category == "Todas" || product.category.equals(category, ignoreCase = true)
-                val matchesSearch = product.name.lowercase().contains(query.lowercase())
+                val matchesSearch = product.name.normalizar().contains(queryNormalizada)
                 matchesCategory && matchesSearch
             }
         }.stateIn(
@@ -132,4 +135,10 @@ class ProductViewModelFactory(private val repository: ProductRepository) : ViewM
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
+}
+
+fun String.normalizar(): String {
+    val temp = Normalizer.normalize(this, Normalizer.Form.NFD)
+    return temp.replace(Regex("\\p{InCombiningDiacriticalMarks}+"), "")
+        .lowercase(Locale.getDefault())
 }

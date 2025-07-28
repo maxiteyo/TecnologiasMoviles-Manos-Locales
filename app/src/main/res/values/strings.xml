@@ -52,6 +52,7 @@
         <item>Inglés</item>
         <item>Portugués</item>
     </string-array>
+    <string name="contactar_al_desarrollador">Contactar al desarrollador</string>
 
     <!-- ProfileFragment -->
     <string name="perfil">Perfil</string>

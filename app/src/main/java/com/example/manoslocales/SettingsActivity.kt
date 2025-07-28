@@ -16,6 +16,7 @@ import androidx.work.WorkManager
 import com.example.manoslocales.databinding.ActivitySettingsBinding
 import java.util.*
 import java.util.concurrent.TimeUnit
+import android.net.Uri
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -34,6 +35,11 @@ class SettingsActivity : AppCompatActivity() {
         //probarNotificacion()
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // CONTACTAR AL DESARROLLADOR
+        binding.btnContactDeveloper.setOnClickListener {
+            sendEmailToDeveloper()
+        }
 
         val sharedPrefs = getSharedPreferences("app_settings", MODE_PRIVATE)
 
@@ -140,6 +146,24 @@ class SettingsActivity : AppCompatActivity() {
         val config = Configuration(context.resources.configuration)
         config.setLocale(locale)
         return context.createConfigurationContext(config)
+    }
+
+    private fun sendEmailToDeveloper() {
+        val developerEmail = "ssuppia175@alumnos.iua.edu.ar"
+        val subject = "Consulta desde la app Manos Locales"
+
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:") // Solo las apps de email deberían abrir esto
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(developerEmail))
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+        }
+
+        // Verifica si hay una app que pueda manejar el intent
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        } else {
+            Toast.makeText(this, "No se encontró una aplicación de correo.", Toast.LENGTH_SHORT).show()
+        }
     }
 
     //Para probar notifiaaciones

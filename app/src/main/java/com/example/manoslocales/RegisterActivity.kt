@@ -147,6 +147,7 @@ class RegisterActivity : AppCompatActivity() {
                 .set(userData)
                 .addOnSuccessListener {
                     Toast.makeText(this, getString(R.string.registroexitoso), Toast.LENGTH_LONG).show()
+                    auth.signOut()
 
                     val intent = Intent(this, LoginActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

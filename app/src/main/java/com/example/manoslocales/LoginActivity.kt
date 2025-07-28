@@ -34,6 +34,14 @@ class LoginActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
+        val appPrefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val isFirstRun = appPrefs.getBoolean("IS_FIRST_RUN", true)
+
+        if (isFirstRun) {
+            auth.signOut()
+            appPrefs.edit().putBoolean("IS_FIRST_RUN", false).apply()
+        }
+
         val sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         val savedEmail = sharedPref.getString("SAVED_EMAIL", null)
         if (savedEmail != null) {

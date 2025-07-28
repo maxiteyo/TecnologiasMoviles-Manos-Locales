@@ -70,31 +70,21 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // --- INICIO DEL CÓDIGO A AGREGAR ---
-
-                        // Lógica de "Recuérdame"
                         val sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
                         with(sharedPref.edit()) {
                             if (binding.checkbox.isChecked) {
-                                // Si está marcado, guarda el email
                                 putString("SAVED_EMAIL", email)
                             } else {
-                                // Si no está marcado, borra cualquier email guardado
                                 remove("SAVED_EMAIL")
                             }
-                            apply() // Aplica los cambios
+                            apply()
                         }
-
-                        // --- FIN DEL CÓDIGO A AGREGAR ---
-
-                        // Login exitoso
                         Toast.makeText(this, "Login exitoso.", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, MainActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                         finish()
                     } else {
-                        // Si el login falla, maneja los errores específicos.
                         try {
                             throw task.exception!!
                         } catch (e: FirebaseAuthInvalidUserException) {
@@ -120,6 +110,18 @@ class LoginActivity : AppCompatActivity() {
         binding.olvidasteContra.setOnClickListener {
             val intent = Intent(this, ForgotPasswordActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        // Comprueba si el usuario ya ha iniciado sesión
+        if (auth.currentUser != null) {
+            // Si hay un usuario, ve directamente a la pantalla principal
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish() // Cierra LoginActivity para que el usuario no pueda volver
         }
     }
 }

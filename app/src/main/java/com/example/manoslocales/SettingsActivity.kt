@@ -153,12 +153,11 @@ class SettingsActivity : AppCompatActivity() {
         val subject = "Consulta desde la app Manos Locales"
 
         val intent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("mailto:") // Solo las apps de email deberían abrir esto
+            data = Uri.parse("mailto:")
             putExtra(Intent.EXTRA_EMAIL, arrayOf(developerEmail))
             putExtra(Intent.EXTRA_SUBJECT, subject)
         }
 
-        // Verifica si hay una app que pueda manejar el intent
         if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent)
         } else {
